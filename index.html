@@ -1,0 +1,887 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Seven Hand Poker — MSN Sounds & Animations</title><script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><style>
+:root{font-family:system-ui,Segoe UI,sans-serif;color:#f9edd6;background:#101c1a}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#234c3f,#101c1a 75%);min-height:100vh}main{max-width:1100px;margin:auto;padding:22px}h1{font-family:Georgia,serif;letter-spacing:2px;color:#e9c77a;margin:4px 0}p{color:#c6d1c9}.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}.panel{background:#142620e8;border:1px solid #577565;border-radius:16px;padding:18px;margin:15px 0;box-shadow:0 12px 35px #0003}button,input{font:inherit}button{background:#d8ad56;border:0;color:#15231d;border-radius:9px;padding:11px 15px;font-weight:700;cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}button.secondary{background:#314e43;color:#fff}input{background:#0d1c17;border:1px solid #668070;color:white;border-radius:8px;padding:10px;max-width:100%}.flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.hidden{display:none!important}.muted{color:#adc1b3;font-size:14px}.felt{background:radial-gradient(ellipse,#a32235,#690f22);border:9px solid #4c3023;border-radius:30px;padding:22px 15px;box-shadow:inset 0 0 0 3px #bd9461,0 18px 35px #0005}.lanes{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.lane{min-width:0;text-align:center;border:1px dashed #ffffff65;border-radius:9px;padding:7px 2px;min-height:155px;position:relative}.coin{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff2b1,#e7b83b 50%,#99641a);border:3px double #fff2a2;color:#75480c;font-size:21px;display:grid;place-items:center;margin:6px auto;box-shadow:0 3px 4px #0005}.lane.player0 .coin{background:radial-gradient(circle at 30% 25%,#b9f5ff,#42a7ca 55%,#215877);color:#15435a}.lane.player1 .coin{background:radial-gradient(circle at 30% 25%,#ffdaab,#e27745 55%,#873e24);color:#692f1c}.stack{font-size:12px;min-height:31px;overflow:hidden}.tinycards{font-size:12px;word-break:break-word;color:#fff}.cards{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:15px 0}.card{height:116px;width:79px;background:linear-gradient(145deg,#fff,#f8f7f2);color:#161d27;border:1px solid #d5d4ce;border-radius:9px;position:relative;padding:0;box-shadow:0 3px 0 #b4b0a7,0 7px 12px #0005;user-select:none;flex-shrink:0;transition:transform .15s,box-shadow .15s;overflow:hidden}.card.red{color:#c51f34}.card.selected{transform:translateY(-17px);border:2px solid #eec35b;box-shadow:0 0 0 3px #f9df8b,0 12px 15px #0007}.card .corner{position:absolute;top:5px;left:6px;display:flex;flex-direction:column;align-items:center;line-height:.9;font-family:Georgia,serif;font-weight:bold;font-size:19px;letter-spacing:-1px}.card .corner .small-suit{font-size:15px;line-height:1.2;letter-spacing:0}.card .corner.bottom{top:auto;left:auto;bottom:5px;right:6px;transform:rotate(180deg)}.card .center-suit{position:absolute;inset:0;display:grid;place-items:center;font-size:45px;line-height:1;font-family:Georgia,serif}.card.back{background:repeating-linear-gradient(45deg,#1c4267 0px,#1c4267 5px,#356a9b 5px,#356a9b 8px);border:5px solid #f8f5e9;box-shadow:inset 0 0 0 2px #b8d0df,0 4px 9px #0005}.card.back:after{content:'✦';position:absolute;inset:13px 9px;display:grid;place-items:center;border:2px solid #d4e5f1;border-radius:4px;color:#e7f1fa;font-size:26px;text-shadow:0 1px 3px #102b4e}.card:disabled{opacity:1;cursor:default}.card:not(:disabled){cursor:pointer}.card:not(:disabled):hover:not(.selected){transform:translateY(-5px)}.status{padding:12px;background:#101f1c;border-radius:10px;color:#e9c77a;min-height:46px}.scores{display:flex;justify-content:space-between;gap:10px}.scores strong{font-size:22px}#qr{background:white;padding:12px;width:max-content;margin:12px auto}#qr img{display:block}#invite{text-align:center}#invite input{width:min(100%,480px)}.rule{font-size:13px;color:#d2d9d1}.pill{background:#26473b;padding:6px 12px;border-radius:30px;font-size:13px}@media(max-width:650px){main{padding:10px}.felt{padding:9px 4px;border-width:5px}.lanes{gap:2px}.lane{padding:4px 1px;min-height:145px}.coin{width:28px;height:28px;font-size:16px}.stack,.tinycards{font-size:10px}.card{width:46px;height:73px}.card .corner{font-size:14px;top:3px;left:4px}.card .corner .small-suit{font-size:11px}.card .corner.bottom{bottom:3px;right:4px;top:auto;left:auto}.card .center-suit{font-size:28px}.card.back:after{inset:8px 5px;font-size:18px}.cards{gap:4px}}
+
+/* Interactive play dialog and multiplayer chat */
+#game{position:relative} .game-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.game-main{min-width:0}.chat-panel{position:sticky;top:12px;margin:0;display:flex;flex-direction:column;height:min(75vh,680px);min-height:360px}
+.chat-title{display:flex;align-items:center;justify-content:space-between;gap:8px}.chat-title h3{margin:0}.chat-messages{flex:1;overflow:auto;display:flex;flex-direction:column;gap:9px;padding:12px 0;min-height:120px}
+.chat-line{background:#253e34;border-radius:12px;padding:9px 11px;overflow-wrap:anywhere;font-size:14px}.chat-line.mine{background:#66502b}.chat-line .who{font-size:11px;font-weight:800;color:#f3d48a;margin-bottom:3px}.chat-compose{display:flex;gap:7px}.chat-compose input{min-width:0;width:100%;flex:1}.chat-compose button{padding:9px 12px}.chat-unread{background:#d8ad56;color:#15231d;border-radius:12px;padding:1px 6px;font-size:11px}
+#controls-original{display:none!important}.play-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:#06120fc9;padding:16px;backdrop-filter:blur(5px)}.play-modal.hidden{display:none!important}.play-dialog{width:min(96vw,560px);max-height:85vh;overflow:auto;background:#183128;border:2px solid #d8ad56;border-radius:20px;padding:24px;box-shadow:0 20px 80px #000b}.play-dialog h2{color:#f1d28e;margin:0 0 12px;font-family:Georgia,serif}.play-dialog #choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:9px;margin-top:15px}.play-dialog #action{margin-top:12px;width:100%;font-size:17px}.modal-top{display:flex;align-items:start;justify-content:space-between;gap:12px}.modal-close{background:#345447;color:#fff;padding:5px 12px}.move-launch{position:static;display:block;margin:16px auto 4px;z-index:5;box-shadow:0 5px 20px #0008}.move-launch.hidden{display:none!important}
+#chat-toggle{display:none}
+@media(max-width:850px){.game-layout{display:block}.chat-panel{position:fixed;z-index:90;right:10px;bottom:70px;top:auto;width:min(92vw,370px);height:min(65vh,520px);box-shadow:0 12px 45px #000a}.chat-panel.chat-collapsed{display:none}#chat-toggle{display:block;position:fixed;z-index:89;bottom:14px;right:14px;box-shadow:0 5px 20px #0009}.play-dialog{padding:18px}.move-launch{position:static;transform:none;display:block;margin:14px auto 4px;max-width:calc(100% - 24px);width:max-content}}
+.chat-line audio{width:100%;max-width:270px;margin-top:5px}.chat-compose #voice-record{padding:9px 11px}#voice-controls,#voice-preview{padding-top:10px;font-size:13px}#voice-preview audio{width:100%;max-width:300px}#voice-preview .flex{margin-top:7px}#chat-toggle .chat-badge{position:absolute;top:-9px;right:-8px;min-width:23px;height:23px;padding:2px 5px;border-radius:999px;background:#e32f43;color:#fff;border:2px solid #142620;box-shadow:0 2px 8px #0008;font-size:12px;font-weight:900;line-height:17px;text-align:center}#chat-toggle .chat-badge.hidden{display:none!important}
+/* The tutorial shows the same placement decision that the real player makes. */
+#landing-guide .lg-placement-shade{position:absolute;inset:0;z-index:7;background:rgba(6,24,45,.72);display:flex;align-items:center;justify-content:center;padding:7px;animation:lg-popup-in .3s ease-out both}
+#landing-guide .lg-placement-popup{background:linear-gradient(#f7fcff,#d8eafd);color:#164a79;border:2px solid #78b5e7;border-radius:9px;box-shadow:0 8px 24px #0008;padding:10px 9px;text-align:center;width:min(96%,350px);font:12px Tahoma,Arial,sans-serif}
+#landing-guide .lg-placement-popup strong{display:block;font-size:13px;margin-bottom:5px}
+#landing-guide .lg-placement-popup p{margin:5px 0 8px;font-size:11px}
+#landing-guide .lg-placement-cards{display:flex;justify-content:center;gap:3px;margin:5px 0}
+#landing-guide .lg-placement-choices{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+#landing-guide .lg-placement-choices button{min-width:0;padding:5px 0;border:1px solid #aa781a;border-radius:6px;background:linear-gradient(#ffe7a1,#e5aa42);color:#603d00;font-size:12px;cursor:pointer;box-shadow:none}
+#landing-guide .lg-placement-choices button:hover,#landing-guide .lg-placement-choices button:focus-visible{background:#fff1c3;outline:2px solid #2481c5}
+#landing-guide .lg-placement-choices button.lg-choice-highlight{outline:2px solid #2679c2;outline-offset:1px}
+#landing-guide .lg-placement-note{font-size:10px;opacity:.8;margin-top:7px}
+@keyframes lg-popup-in{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@media(max-width:560px){#landing-guide .lg-placement-popup{padding:7px 4px;font-size:10px}#landing-guide .lg-placement-popup strong{font-size:11px}#landing-guide .lg-placement-choices{gap:2px}#landing-guide .lg-placement-choices button{font-size:10px;padding:4px 0}#landing-guide .lg-placement-popup p{font-size:9px}}
+</style><style id="homepage-howto-style">.howto{margin-top:22px;padding:18px 20px;background:rgba(8,22,20,.48);border:1px solid rgba(242,210,143,.22);border-radius:14px}.howto h3{margin:0 0 5px;color:#f6d997;font-size:1.2rem}.howto-intro{margin:0 0 13px;color:#c7d4cc}.howto ol{margin:0;padding-left:23px;display:grid;gap:10px;line-height:1.48}.howto li{padding-left:3px}.handguide{margin-top:17px;border-top:1px solid #ffffff26;padding-top:13px}.handguide summary{cursor:pointer;font-weight:700;color:#f6d997;padding:5px 0}.handrank{display:grid;gap:0;margin-top:10px}.handrank>div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #ffffff1a;font-size:13px}.handrank span{text-align:right;color:#c7d4cc;max-width:58%}@media(max-width:560px){.howto{padding:15px 14px}.handrank>div{display:block}.handrank span{display:block;text-align:left;max-width:none;margin-top:3px}}</style><style id="msn-messenger-skin">
+/* MSN Messenger 2005-inspired Windows XP skin */
+:root{font-family:Tahoma,'Trebuchet MS',Verdana,sans-serif!important;color:#173a61!important;background:#d7eafa!important}
+body{background:linear-gradient(180deg,#b4d8f5 0,#eaf6ff 230px,#c6e2f7 100%) fixed!important;color:#173a61!important}
+main{max-width:1160px;padding-top:18px}
+.top{background:linear-gradient(180deg,#fff 0%,#e7f3ff 30%,#90bce8 84%,#5e97d2 100%);border:1px solid #6598ca;border-radius:12px 12px 5px 5px;padding:15px 20px;box-shadow:inset 0 1px 0 white,0 5px 18px #4978a34d}
+h1{font-family:Tahoma,Verdana,sans-serif!important;font-size:clamp(20px,3.4vw,31px);font-weight:800;letter-spacing:-.8px!important;color:#14559b!important;text-shadow:0 1px 0 white;margin:0!important}
+h1:before{content:'●';display:inline-block;color:#5caf27;font-size:19px;margin-right:10px;text-shadow:0 1px 0 #fff,0 0 4px #6baf37}
+p,.muted,.rule{color:#46678c!important}.top .muted{color:#386b9c!important}.pill{background:#f6fbff!important;border:1px solid #8bb4db;color:#225d96!important;box-shadow:inset 0 1px 0 white}
+.panel{background:linear-gradient(180deg,#fff 0%,#f3faff 100%)!important;border:1px solid #8fb7df!important;border-radius:10px!important;box-shadow:inset 0 1px 0 white,0 4px 14px #5a8db52e!important;color:#234b78!important}
+h2,h3{color:#1e609f!important}button{background:linear-gradient(#fff,#e3f2ff 43%,#a8d2f5 48%,#d7eaff)!important;color:#164e84!important;border:1px solid #679dce!important;border-radius:5px!important;box-shadow:inset 0 1px white,0 1px 2px #759cc255!important;text-shadow:0 1px #fff}button:hover:not(:disabled){background:linear-gradient(#fff,#fff4d9 45%,#ffcf7b 49%,#ffebba)!important;border-color:#e2a33f!important}button:active:not(:disabled){filter:brightness(.95)}button.secondary{background:linear-gradient(#fff,#e8f0fa 48%,#cadbea 50%,#e4eff8)!important;color:#315a80!important}
+input{background:#fff!important;color:#214f7c!important;border:1px solid #8ab1d3!important;border-radius:4px!important;box-shadow:inset 1px 1px 2px #b6c9d7!important}
+.howto{background:linear-gradient(180deg,#f1f9ff,#e5f3ff)!important;border:1px solid #b0d0ee!important;border-radius:8px!important}.howto h3,.handguide summary{color:#175c9c!important}.howto-intro,.handrank span{color:#537596!important}.handrank>div{border-bottom-color:#bcd8ef!important}
+#recovery-controls{background:#e6f3ff!important;border:1px solid #9bc2e6!important;color:#356187!important;border-radius:6px!important}#recovery-note{color:#356187!important}
+.felt{background:radial-gradient(ellipse at 50% 30%,#478b68,#236548 68%,#164c38)!important;border:8px solid #b6cde2!important;box-shadow:inset 0 0 0 3px #e7f3ff,0 10px 25px #427da54d!important;border-radius:14px!important}
+.lane{border:1px dashed #d7f4e4aa!important}.status{background:linear-gradient(#e9f6ff,#cbe7fb)!important;color:#1a5d95!important;border:1px solid #8fbbe0!important}.scores{color:#205c93!important}
+.chat-panel{background:linear-gradient(#fff,#eff7ff)!important;border:1px solid #7aa9d6!important;box-shadow:0 8px 28px #366e9b40!important}.chat-title{background:linear-gradient(#e5f5ff,#a8d1f2);border:1px solid #8fbce1;border-radius:6px;padding:8px}.chat-line{background:#e6f3ff!important;color:#24577f!important;border:1px solid #c4ddf2;border-radius:5px!important}.chat-line.mine{background:#fff3d6!important;border-color:#ead5a1!important}.chat-line .who{color:#21639f!important}
+.play-modal{background:#1a4e7a91!important;backdrop-filter:blur(3px)}.play-dialog{background:linear-gradient(#fff,#e8f4ff)!important;border:2px solid #79addb!important;border-radius:10px!important;box-shadow:0 16px 55px #123e6a70!important}.play-dialog h2{color:#185d9e!important;font-family:Tahoma,Verdana,sans-serif!important}
+#chat-toggle{background:linear-gradient(#fff,#b4ddfb 48%,#79b7e7 49%,#d9efff)!important;color:#175c9a!important;border:1px solid #6397c8!important}#chat-toggle .chat-badge{border-color:#fff!important}
+.msn-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:7px 8px;margin:8px 0 0;background:linear-gradient(#fff,#d4eafa);border:1px solid #8ebbe0;border-radius:6px}.msn-toolbar button{display:flex;align-items:center;gap:6px;padding:6px 10px;font-size:12px}.msn-nudge-icon{width:23px;height:23px;object-fit:contain}.msn-nudge-note{font-size:12px;color:#4a7298}.msn-nudge-toast{position:fixed;top:17px;left:50%;transform:translateX(-50%);background:linear-gradient(#fff,#c6e5ff);border:2px solid #5c9ed4;border-radius:9px;padding:12px 18px;z-index:300;color:#175b95;font-weight:700;box-shadow:0 6px 30px #184d7b80;pointer-events:none}
+@keyframes msnNudge{0%,100%{transform:translate(0,0)}9%{transform:translate(-11px,3px)}18%{transform:translate(12px,-5px)}27%{transform:translate(-13px,6px)}36%{transform:translate(13px,3px)}45%{transform:translate(-10px,-6px)}54%{transform:translate(12px,5px)}63%{transform:translate(-9px,2px)}72%{transform:translate(8px,-4px)}81%{transform:translate(-5px,2px)}90%{transform:translate(4px,-2px)}}
+body.msn-shaking main{animation:msnNudge .66s linear 1}body.msn-shaking{overflow-x:hidden}
+@media(prefers-reduced-motion:reduce){body.msn-shaking main{animation:none}.msn-nudge-toast{outline:3px solid #ffca5b}}
+@media(max-width:850px){#chat-toggle{position:fixed!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;right:14px!important;top:auto!important;left:auto!important;z-index:95!important}.msn-toolbar{justify-content:center}.top{padding:12px}.felt{border-width:5px!important}}
+
+/* Original Messenger-style icon-only nudge control */
+.msn-toolbar{padding:3px 6px;min-height:38px;justify-content:flex-start}
+.msn-toolbar #msn-nudge{width:38px;height:33px;padding:3px!important;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.msn-toolbar #msn-nudge .msn-nudge-icon{width:29px;height:25px;object-fit:contain;image-rendering:auto}
+/* Lightweight card-deal and coin-capture effects */
+@keyframes msnCardDeal{from{opacity:.2;transform:translateY(-16px) rotate(-5deg) scale(.9)}to{opacity:1;transform:translateY(0) rotate(0) scale(1)}}
+@keyframes msnCardPlay{0%{transform:translateY(0) scale(1)}45%{transform:translateY(-14px) scale(1.045)}100%{transform:translateY(0) scale(1)}}
+@keyframes msnCoinWin{0%{filter:brightness(1);transform:scale(1)}35%{filter:brightness(1.7);transform:scale(1.24)}100%{filter:brightness(1);transform:scale(1)}}
+@keyframes msnTableFlash{0%{box-shadow:inset 0 0 0 3px #e7f3ff,0 10px 25px #427da54d}50%{box-shadow:inset 0 0 0 3px #e7f3ff,0 0 30px 5px #ffdc7c}100%{box-shadow:inset 0 0 0 3px #e7f3ff,0 10px 25px #427da54d}}
+.card.msn-dealing{animation:msnCardDeal .38s ease-out both}
+.card.msn-playing{animation:msnCardPlay .38s ease-out both}
+.lane.msn-captured .coin{animation:msnCoinWin .75s ease-in-out both}
+.felt.msn-win-flash{animation:msnTableFlash .9s ease-in-out both}
+.msn-sound-toggle{font:12px Tahoma,Verdana,sans-serif!important;min-width:38px;min-height:31px;padding:5px 7px!important}
+@media(prefers-reduced-motion:reduce){.card.msn-dealing,.card.msn-playing,.lane.msn-captured .coin,.felt.msn-win-flash{animation:none!important}}
+</style><style id="msn-contrast-fix">
+.felt .muted{color:#fff!important;font-weight:800;text-shadow:0 2px 3px #123e2b!important}
+.felt .stack,.felt .tinycards{color:#fff!important;font-weight:800;text-shadow:0 1px 3px #092f21;overflow-wrap:anywhere}
+.felt .lane{background:#0a392b55;border-color:#e6fff1!important}
+.status{color:#103e70!important;font-weight:700;background:#d5edff!important}
+.scores,.scores strong{color:#104575!important}
+.chat-line,.chat-line .who{color:#123e68!important}
+.msn-nudge-toast{color:#104a80!important;background:linear-gradient(#fff,#d1eaff)!important}
+</style><style id="tribute-and-results-css">.msn-tribute{display:flex;align-items:center;gap:15px;background:linear-gradient(120deg,#f7fcff,#dcefff);border:1px solid #9dc6e8;border-radius:10px;padding:13px 16px;margin-bottom:18px;color:#19558e}.msn-tribute strong{display:block;font-size:22px}.msn-tribute span,.msn-tribute small{display:block;margin-top:5px}.msn-tribute small{color:#4c7192}.msn-tribute svg{flex-shrink:0}#match-result{position:fixed;inset:0;z-index:220;background:#103a68b8;display:flex;align-items:center;justify-content:center;padding:15px;backdrop-filter:blur(3px)}#match-result.hidden{display:none!important}.result-window{background:linear-gradient(#fff,#e6f4ff);border:3px solid #6ca7da;border-radius:14px;box-shadow:0 18px 70px #0b2e57a8;padding:25px;width:min(95vw,520px);max-height:90vh;overflow:auto;color:#174d7c;text-align:center}.result-window h2{font-size:29px;margin:7px 0}.result-trophy{font-size:55px}.result-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.result-stat{background:white;border:1px solid #aacde8;border-radius:8px;padding:12px}.result-stat b{display:block;font-size:25px}.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.result-actions button{min-width:145px}.result-scoreboard{background:#f5fbff;border:1px solid #b4d4ed;border-radius:9px;padding:10px;margin:15px 0;text-align:left}.result-scoreboard table{width:100%;border-collapse:collapse}.result-scoreboard td,.result-scoreboard th{padding:7px;border-bottom:1px solid #d5e7f5;text-align:left}.result-scoreboard th:last-child,.result-scoreboard td:last-child{text-align:right}.result-note{font-size:12px;color:#4c7192!important}@media(max-width:520px){.msn-tribute{gap:7px;padding:9px}.msn-tribute svg{width:62px}.msn-tribute strong{font-size:18px}}</style><style id="simplified-brand">.msn-brand-link{display:flex;align-items:center;gap:13px;flex:1;min-width:0;text-decoration:none!important;color:#155b9c!important;border-radius:7px;padding:4px 6px;transition:background .15s}.msn-brand-link:hover{background:#ffffff72}.msn-brand-link:focus-visible{outline:3px solid #f1ad32}.msn-brand-link svg{flex-shrink:0;width:67px;height:54px}.msn-brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}.msn-brand-title{font-size:clamp(24px,3.6vw,34px);font-weight:800;letter-spacing:-.6px;line-height:1.1;color:#12579b}.msn-brand-subtitle{font-size:clamp(12px,1.4vw,15px);line-height:1.35;color:#305e89}.msn-brand-subtitle b{color:#185a99}@media(max-width:560px){.msn-brand-link{gap:7px}.msn-brand-link svg{width:48px;height:42px}.msn-brand-title{font-size:24px}.top .pill{font-size:11px}}</style><style id="mini-card-faces">
+/* Readable, real playing-card faces for hands placed on the table. */
+.felt .tinycards.mini-hand{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:3px;padding:4px 1px;min-height:33px;overflow:visible;word-break:normal}
+.felt .mini-playing-card{display:inline-flex;align-items:flex-start;justify-content:center;min-width:25px;height:36px;padding:4px 2px 1px;border:1px solid #c9d3db;border-radius:4px;background:linear-gradient(145deg,#fff,#f4f6fa);color:#17232e!important;font:bold 13px Georgia,serif;line-height:1.1;text-shadow:none!important;box-shadow:0 2px 3px #06291d66;white-space:nowrap}
+.felt .mini-playing-card.mini-red{color:#c41d36!important}
+@media(max-width:760px){.felt .tinycards.mini-hand{gap:1px}.felt .mini-playing-card{min-width:17px;height:29px;padding:3px 1px 0;font-size:10px;border-radius:3px}}
+@media(max-width:430px){.felt .mini-playing-card{min-width:15px;height:25px;font-size:9px}}
+/* Keep every placed hand centred within its coin lane. */
+.felt .lane{display:flex;flex-direction:column;align-items:center;min-width:0}
+.felt .lane>.stack,.felt .lane>.tinycards{width:100%;text-align:center}
+.felt .lane>.tinycards.mini-hand{display:flex!important;justify-content:center!important;align-items:center;align-content:center;flex-wrap:wrap;margin-left:auto;margin-right:auto;gap:3px}
+.felt .lane>.coin{flex-shrink:0;margin-left:auto;margin-right:auto}
+@media(max-width:760px){.felt .lane>.tinycards.mini-hand{gap:1px}}
+</style><style id="pending-card-preview-style">
+/* Same patterned card back as the game, scaled for the coin-position dialog. */
+.pending-card-preview{display:flex;align-items:center;justify-content:flex-start;gap:7px;flex-wrap:wrap;margin:11px 0 14px;min-height:62px}
+.pending-mini-card.card.back{width:39px;height:57px;min-width:39px;flex:0 0 39px;border-width:3px;border-radius:6px;pointer-events:none;box-shadow:inset 0 0 0 1px #b8d0df,0 2px 5px #19496b40}
+.pending-mini-card.card.back:after{inset:6px 4px;border-width:1px;border-radius:3px;font-size:16px}
+@media(max-width:450px){.pending-card-preview{gap:5px}.pending-mini-card.card.back{width:32px;height:47px;min-width:32px;flex-basis:32px}.pending-mini-card.card.back:after{inset:5px 3px;font-size:13px}}
+</style><style id="playing-card-suit-colors">
+/* Explicit suit colors override the Messenger-themed button styles. */
+#hand .card:not(.back), #oppcards .card:not(.back){color:#142b40!important}
+#hand .card.red:not(.back), #oppcards .card.red:not(.back){color:#cf1837!important}
+#hand .card.red .corner, #hand .card.red .center-suit,
+#oppcards .card.red .corner, #oppcards .card.red .center-suit{color:#cf1837!important}
+#hand .card:not(.red):not(.back) .corner, #hand .card:not(.red):not(.back) .center-suit{color:#142b40!important}
+</style><style id="coin-alignment-final">
+/* Reserve identical vertical space above each coin, regardless of whether cards are present. */
+.felt .lane>.stack:first-child{height:20px!important;min-height:20px!important;max-height:20px!important;line-height:20px!important;overflow:hidden!important}
+.felt .lane>.tinycards:nth-child(2){height:38px!important;min-height:38px!important;max-height:38px!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:nowrap!important;gap:2px!important;overflow:visible!important;white-space:nowrap!important}
+.felt .lane>.tinycards:nth-child(2) .mini-blue-back{width:clamp(9px,1.55vw,20px)!important;min-width:0!important;height:30px!important;flex:0 1 clamp(9px,1.55vw,20px)!important}
+.felt .lane>.tinycards:nth-child(2) .mini-blue-back:after{inset:4px 2px!important;font-size:10px!important}
+.felt .lane>.coin{margin-top:6px!important;margin-bottom:6px!important}
+@media(max-width:650px){.felt .lane>.tinycards:nth-child(2){height:30px!important;min-height:30px!important;max-height:30px!important;gap:1px!important}.felt .lane>.tinycards:nth-child(2) .mini-blue-back{width:clamp(6px,1.8vw,13px)!important;height:22px!important;flex-basis:clamp(6px,1.8vw,13px)!important}.felt .lane>.tinycards:nth-child(2) .mini-blue-back:after{inset:2px 1px!important;font-size:7px!important}}
+</style><style id="rematch-notification-style">
+#rematch-notification[hidden]{display:none!important}
+#rematch-notification{position:fixed;z-index:99999;top:18px;left:50%;transform:translateX(-50%);width:min(92vw,430px);box-sizing:border-box;padding:18px 22px;background:linear-gradient(#fff,#d8edff);border:3px solid #428ac4;border-radius:14px;color:#154e82;text-align:center;box-shadow:0 12px 40px #1238}
+#rematch-notification strong{font-size:21px}
+#rematch-notification p{margin:12px 0}
+</style><style id="five-card-lane-layout-fix">
+/* Each revealed hand occupies a consistent two-row slot. No clipping or overflow. */
+.felt .lane>.tinycards.mini-hand{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ grid-template-rows:repeat(2,27px)!important;
+ gap:2px!important;justify-items:center!important;align-content:center!important;
+ width:100%!important;height:62px!important;min-height:62px!important;max-height:62px!important;
+ padding:2px 1px!important;overflow:hidden!important;white-space:normal!important;
+}
+.felt .lane>.tinycards.mini-hand .mini-playing-card{
+ box-sizing:border-box!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;
+ min-width:0!important;width:100%!important;max-width:26px!important;height:27px!important;
+ padding:3px 0 0!important;font-size:clamp(9px,.85vw,12px)!important;line-height:1!important;
+ border-radius:3px!important;letter-spacing:-.4px!important;
+}
+/* Keep unoccupied slots at the same height, preserving coin alignment. */
+.felt .lane>.tinycards:nth-child(5){min-height:62px!important;height:62px!important;max-height:62px!important}
+.felt .lane>.tinycards:nth-child(2):not(.mini-back-hand){min-height:62px!important;height:62px!important;max-height:62px!important}
+/* The upper hidden-card row is still compact; coins align with all other lanes. */
+.felt .lane>.tinycards:nth-child(2).mini-back-hand{height:62px!important;min-height:62px!important;max-height:62px!important}
+@media(max-width:760px){
+ .felt .lane>.tinycards.mini-hand{grid-template-rows:repeat(2,24px)!important;height:56px!important;min-height:56px!important;max-height:56px!important;gap:1px!important}
+ .felt .lane>.tinycards.mini-hand .mini-playing-card{height:24px!important;font-size:9px!important;padding-top:3px!important}
+ .felt .lane>.tinycards:nth-child(2),.felt .lane>.tinycards:nth-child(5){height:56px!important;min-height:56px!important;max-height:56px!important}
+}
+</style>
+<style id="mobile-card-scroll-clearance">
+/* Allow the last row of cards to scroll above floating Chat / In call controls. */
+@media (max-width:850px){
+  #game{padding-bottom:calc(175px + env(safe-area-inset-bottom, 0px))!important;}
+  #game .felt{scroll-margin-bottom:175px;}
+  html{scroll-padding-bottom:calc(175px + env(safe-area-inset-bottom, 0px));}
+}
+</style>
+<style id="animated-landing-guide-css">
+#landing-guide{margin:17px 0 20px;border:1px solid #84b4df;border-radius:12px;background:linear-gradient(165deg,#f7fcff,#d7ebff);box-shadow:0 5px 18px #437ba426;overflow:hidden;color:#164d7d}
+#landing-guide .lg-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px;flex-wrap:wrap}
+#landing-guide .lg-head strong{font-size:18px;color:#165b9b}#landing-guide .lg-head p{margin:3px 0 0;font-size:12px}
+#landing-guide .lg-head button{padding:7px 12px;font-size:12px}
+#landing-guide .lg-stage{padding:14px 13px;background:radial-gradient(ellipse at 50% 20%,#3b8a65,#17543e);border-top:4px solid #a2c6e4;border-bottom:4px solid #a2c6e4;color:#fff;min-height:272px;position:relative;overflow:hidden}
+#landing-guide .lg-view{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px;font-size:12px;font-weight:bold}
+#landing-guide .lg-perspective{background:#f5fbff;color:#135a95;border-radius:6px;padding:5px 10px;box-shadow:0 1px 4px #1236}
+#landing-guide .lg-player{font-size:12px;color:#fff;text-shadow:0 1px 2px #123a2c;font-weight:bold;text-align:center;margin:5px 0}
+#landing-guide .lg-board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;max-width:700px;margin:9px auto}
+#landing-guide .lg-lane{border:1px dashed #b6e5d3aa;border-radius:7px;min-height:106px;display:flex;align-items:center;justify-content:space-between;flex-direction:column;padding:5px 1px;background:#103b2b4f;transition:background .5s,transform .5s}
+#landing-guide .lg-lane.lg-focus{background:#e9f9fd30;transform:translateY(-3px);border-color:#fff}
+#landing-guide .lg-coin{height:30px;width:30px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#fff6c3,#e3ae39 60%,#a77018);color:#774607;border:2px solid #ffe7a1;box-shadow:0 2px 4px #0006;transition:background .5s,transform .5s}
+#landing-guide .lg-coin.blue{background:radial-gradient(circle at 30% 25%,#d2faff,#52b5dc 65%,#22638e);color:#104d7b;border-color:#c5efff;transform:scale(1.1)}
+#landing-guide .lg-coin.orange{background:radial-gradient(circle at 30% 25%,#ffe4c2,#f18a52 65%,#b34e2a);color:#713419;border-color:#ffe0b2;transform:scale(1.1)}
+#landing-guide .lg-slots{display:flex;gap:1px;justify-content:center;min-height:25px;align-items:center}
+#landing-guide .lg-mini{display:inline-grid;place-items:center;background:#fff;color:#122b42;border:1px solid #d3dce4;border-radius:3px;font:700 11px Georgia,serif;width:19px;height:25px;box-shadow:0 2px 4px #0005;animation:lg-deal .45s both}
+#landing-guide .lg-mini.red{color:#d51e39}#landing-guide .lg-mini.back{background:repeating-linear-gradient(45deg,#1b4771 0 4px,#5289bd 4px 7px);border:2px solid #fff;color:#fff;font-size:10px}
+#landing-guide .lg-hand{display:flex;justify-content:center;gap:5px;min-height:49px;align-items:center}
+#landing-guide .lg-hand .lg-mini{width:29px;height:43px;font-size:15px;border-radius:5px}
+#landing-guide .lg-caption{padding:11px 15px 5px;min-height:68px;font-size:14px;line-height:1.4;color:#1b568a}
+#landing-guide .lg-caption b{display:block;font-size:15px;margin-bottom:2px;color:#0e5593}
+#landing-guide .lg-progress{height:5px;background:#a7c8e7;margin:10px 15px 0;border-radius:10px;overflow:hidden}
+#landing-guide .lg-progress>div{height:100%;background:#347cb9;width:0;transition:width .18s linear}
+#landing-guide .lg-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 15px 13px;color:#4c7494;font-size:12px}
+@keyframes lg-deal{from{opacity:0;transform:translateY(-15px) rotate(-8deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
+@media(max-width:560px){#landing-guide .lg-stage{padding:11px 6px;min-height:250px}#landing-guide .lg-board{gap:2px}#landing-guide .lg-lane{min-height:95px;padding:4px 0}#landing-guide .lg-coin{width:24px;height:24px;font-size:12px}#landing-guide .lg-mini{width:13px;height:22px;font-size:8px}#landing-guide .lg-hand .lg-mini{width:25px;height:37px;font-size:13px}#landing-guide .lg-head strong{font-size:16px}}
+@media(prefers-reduced-motion:reduce){#landing-guide *,#landing-guide *:before{animation:none!important;transition:none!important}}
+
+/* Two synchronized player perspectives and slide-based guide navigation */
+#landing-guide .lg-dual{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:10px;background:#cce4f8;border-top:2px solid #a2c6e4}
+#landing-guide .lg-screen{min-width:0;border:2px solid #6b9fcb;border-radius:9px;overflow:hidden;background:#174d39}
+#landing-guide .lg-screen-title{font-weight:bold;text-align:center;background:linear-gradient(#f6fcff,#d5ebfc);color:#155786;padding:8px 3px;font-size:14px}
+#landing-guide .lg-stage{min-height:205px;padding:8px 3px;border:0}
+#landing-guide .lg-board{gap:2px;margin:7px auto}
+#landing-guide .lg-lane{min-height:82px;padding:3px 0}
+#landing-guide .lg-coin{height:22px;width:22px;font-size:10px}
+#landing-guide .lg-mini{width:13px;height:19px;font-size:8px}
+#landing-guide .lg-hand{min-height:35px;gap:2px}
+#landing-guide .lg-hand .lg-mini{width:23px;height:31px;font-size:12px}
+#landing-guide .lg-mini.lg-selected{transform:translateY(-6px);box-shadow:0 0 0 2px #ffda6c}
+#landing-guide .lg-player{font-size:9px;margin:3px 0}
+#landing-guide .lg-caption{min-height:75px}
+#landing-guide .lg-footer{flex-wrap:wrap;font-size:13px;font-weight:bold}
+#landing-guide .lg-controls{display:flex;gap:7px;flex-wrap:wrap}
+#landing-guide .lg-controls button{padding:8px 12px}
+#landing-guide .lg-dots{display:flex;justify-content:center;gap:9px;padding:0 12px 14px}
+#landing-guide .lg-dot{height:11px;width:11px;min-width:11px;padding:0;border-radius:50%;background:#9bbbd6;border:1px solid #6b9fcb}
+#landing-guide .lg-dot[aria-current=true]{background:#236fb2;transform:scale(1.25)}
+@media(max-width:560px){#landing-guide .lg-dual{gap:4px;padding:5px}#landing-guide .lg-screen-title{font-size:11px;padding:6px 1px}#landing-guide .lg-stage{padding:5px 1px;min-height:172px}#landing-guide .lg-board{gap:1px}#landing-guide .lg-lane{min-height:70px}#landing-guide .lg-coin{width:15px;height:15px;font-size:8px;border-width:1px}#landing-guide .lg-mini{width:9px;height:15px;font-size:6px;border-width:1px}#landing-guide .lg-hand .lg-mini{width:16px;height:25px;font-size:9px}#landing-guide .lg-player{font-size:8px}#landing-guide .lg-controls button{padding:7px 9px;font-size:11px}}
+#landing-guide .lg-slide-enter .lg-mini{animation:lg-deal .42s ease-out both}
+#landing-guide .lg-slide-enter .lg-lane.lg-focus{animation:lg-lane-flash .7s ease-out both}
+@keyframes lg-lane-flash{0%{box-shadow:0 0 0 0 #ffdf74}45%{box-shadow:0 0 0 3px #ffdf74}100%{box-shadow:0 0 0 0 transparent}}
+</style></head><body><main><div class="top"><a class="msn-brand-link" href="?home=1" aria-label="Seven Hand Poker — back to home"><svg viewBox="0 0 92 70" role="img" aria-label="MSN Messenger-inspired butterfly" width="92" height="70"><path d="M46 31 C12 -2 1 5 10 31 C17 53 33 49 46 39 C58 49 75 53 83 31 C92 4 77 -1 46 31Z" fill="#50a6db" stroke="#2772b1" stroke-width="2"/><path d="M46 31 C24 7 5 9 13 30 C20 45 33 44 46 39Z" fill="#74c4ec"/><path d="M46 39 C28 49 22 69 38 63 L47 48 C62 68 74 62 67 49Z" fill="#71b83b" stroke="#439536" stroke-width="2"/><path d="M46 30 C42 19 49 14 51 25 L49 47 Q46 52 43 46Z" fill="#f8d94e" stroke="#d6a92a" stroke-width="1"/></svg><span class="msn-brand-copy"><span class="msn-brand-title">7 Hand Poker</span><span class="msn-brand-subtitle">A fan-made tribute to the era of MSN Messenger gaming by <b>Christos Kypri</b></span></span></a><span class="pill" id="connection">Not connected</span></div><section class="panel" id="menu"><h2>Play with a friend</h2><p>Create a private game, then share the invitation link or QR code. You can also play on one device in pass-and-play mode.</p><div class="flex"><input id="name" placeholder="Your name" maxlength="24" value="Player 1"><button id="create">Create online room</button><button class="secondary" id="local">Play on one device</button></div><div id="joinbox" class="flex" style="margin-top:12px"><input id="roomcode" placeholder="Room code"><button id="join">Join room</button></div><p class="rule">Online rooms use PeerJS to connect browsers. No account needed.</p><div class="howto"><h3>♠ How to play</h3><p class="howto-intro">Explore the steps using Back and Next before you challenge a friend.</p><ol><li><strong>Start a match.</strong> Enter your name and create a private room. Share its link or QR code with a friend, or join using their room code.</li><li><strong>Choose your cards.</strong> Each player starts with 7 cards. On your turn, select <strong>1 to 5 cards</strong> and press <strong>Play selected cards</strong>.</li><li><strong>Place the hidden hand.</strong> Your opponent sees <strong>how many cards</strong> you played, but not their values, and chooses one of the seven coin positions for them. You do the same when they play.</li><li><strong>Compete for coins.</strong> When both players have cards at a position, the stronger poker combination wins that coin. The game draws <strong>3 replacement cards</strong> after each submitted hand.</li><li><strong>Win the match.</strong> Be the first to claim <strong>4 coins</strong> in total or <strong>3 consecutive coins</strong>.</li></ol><details class="handguide"><summary>🃏 Poker hands — strongest to weakest</summary><div class="handrank"><div><b>1. Royal flush</b><span>10–J–Q–K–A, same suit (highest straight flush)</span></div><div><b>2. Straight flush</b><span>Five consecutive cards, same suit</span></div><div><b>3. Four of a kind</b><span>Four cards of the same rank</span></div><div><b>4. Full house</b><span>Three of a kind plus a pair</span></div><div><b>5. Flush</b><span>Five cards of the same suit</span></div><div><b>6. Straight</b><span>Five consecutive ranks</span></div><div><b>7. Three of a kind</b><span>Three cards of the same rank</span></div><div><b>8. Two pair</b><span>Two different pairs</span></div><div><b>9. One pair</b><span>Two cards of the same rank</span></div><div><b>10. High card</b><span>Highest card wins if no combination</span></div></div><p class="rule">Royal flush is the highest straight flush. You can play fewer than five cards, but combinations needing five cards won't be possible.</p></details></div></section><section class="panel hidden" id="invite"><h2>Invite your opponent</h2><p>Send this link or ask them to scan the QR code.</p><div id="qr"></div><div class="flex" style="justify-content:center"><input id="link" readonly><button id="copy">Copy link</button></div><p id="waiting">Waiting for your opponent…</p></section><section id="game" class="hidden"><div class="panel"><div class="scores"><div>🔵 <span id="p0">Player 1</span><br><strong id="s0">0</strong> coins</div><div style="text-align:right">🟠 <span id="p1">Player 2</span><br><strong id="s1">0</strong> coins</div></div><div class="status" id="status"></div></div><div class="felt"><div class="muted" style="text-align:center;margin-bottom:8px">OPPONENT'S CARDS</div><div id="oppcards" class="cards"></div><div id="lanes" class="lanes"></div><div class="muted" style="text-align:center;margin-top:12px">YOUR CARDS — SELECT 1 TO 5</div><div id="hand" class="cards"></div></div><section class="panel"><div class="flex" style="justify-content:space-between"><div><strong id="phase">Select cards</strong><p class="muted" id="hint">Select up to five cards, then play your hand.</p></div><button id="action">Play selected cards</button></div><div id="choices" class="flex"></div><p class="rule">Goal: capture 4 coins or 3 adjacent coins. Each position compares the poker hands placed there. Each submitted hand draws 3 replacement cards. Ties remain contested until resolved.</p></section></section></main><script>
+const $=id=>document.getElementById(id);let peer,conn,mode='',seat=0,game=null,selected=[],room='',secret=0;
+const suits=['♠','♥','♦','♣'];const fresh=()=>{let a=[];for(let s=0;s<4;s++)for(let r=2;r<=14;r++)a.push({r,s,id:s+'-'+r});return a.sort(()=>Math.random()-.5)};
+function draw(g,n){let out=[];for(let i=0;i<n;i++){if(!g.deck.length){const used=new Set([...g.hands.flat(),...g.lanes.flatMap(l=>l.plays.flatMap(x=>x||[])),...(g.pending?.cards||[])].map(c=>c.id));g.deck=fresh().filter(c=>!used.has(c.id));if(!g.deck.length)break}out.push(g.deck.pop())}return out}
+function newGame(){let g={deck:fresh(),hands:[[],[]],lanes:Array.from({length:7},()=>({plays:[null,null],owner:null})),turn:0,phase:'submit',pending:null,winner:null,names:[$('name').value.trim()||'Player 1','Player 2'],log:'Select 1–5 cards to submit a poker hand.'};g.hands=[draw(g,7),draw(g,7)];return g}
+function evaluate(cards){let r=cards.map(c=>c.r).sort((a,b)=>b-a),counts={};r.forEach(x=>counts[x]=(counts[x]||0)+1);let groups=Object.entries(counts).map(([v,n])=>[+n,+v]).sort((a,b)=>b[0]-a[0]||b[1]-a[1]);let flush=cards.length===5&&cards.every(c=>c.s===cards[0].s),u=[...new Set(r)],straight=cards.length===5&&u.length===5&&(u[0]-u[4]===4||u.join(',')==='14,5,4,3,2');let high=u.join(',')==='14,5,4,3,2'?5:u[0];let cat=0,keys=r;
+if(cards.length===5&&straight&&flush){cat=8;keys=[high]}else if(groups[0][0]===4){cat=7;keys=[groups[0][1],...r.filter(x=>x!==groups[0][1])]}else if(cards.length===5&&groups[0][0]===3&&groups[1][0]===2){cat=6;keys=[groups[0][1],groups[1][1]]}else if(flush){cat=5;keys=r}else if(straight){cat=4;keys=[high]}else if(groups[0][0]===3){cat=3;keys=[groups[0][1],...r.filter(x=>x!==groups[0][1])]}else if(groups[0][0]===2&&groups[1]?.[0]===2){cat=2;keys=[groups[0][1],groups[1][1],...r.filter(x=>x!==groups[0][1]&&x!==groups[1][1])]}else if(groups[0][0]===2){cat=1;keys=[groups[0][1],...r.filter(x=>x!==groups[0][1])]}return [cat,...keys,...Array(6).fill(0)].slice(0,7)}
+const ranknames=['High card','One pair','Two pair','Three of a kind','Straight','Flush','Full house','Four of a kind','Straight flush'];function cmp(a,b){let x=evaluate(a),y=evaluate(b);for(let i=0;i<7;i++)if(x[i]!==y[i])return Math.sign(x[i]-y[i]);return 0}
+function win(g){for(let p=0;p<2;p++){let owned=g.lanes.map(x=>x.owner===p),n=owned.filter(Boolean).length;if(n>=4||owned.some((x,i)=>i<5&&x&&owned[i+1]&&owned[i+2]))return p}return null}
+function cardEl(c,i,clickable){let d=document.createElement('button');d.className='card'+(c.s===1||c.s===2?' red':'')+(selected.includes(i)?' selected':'');let face=c.r===10?'10':('23456789TJQKA'[c.r-2]);d.innerHTML='<span class="corner">'+face+'<span class="small-suit">'+suits[c.s]+'</span></span><span class="center-suit">'+suits[c.s]+'</span><span class="corner bottom">'+face+'<span class="small-suit">'+suits[c.s]+'</span></span>';d.disabled=!clickable;d.onclick=()=>{selected=selected.includes(i)?selected.filter(x=>x!==i):selected.length<5?[...selected,i]:selected;render()};return d}
+function player(){return mode==='local'?game.turn:seat}function myTurn(){return game&&game.winner===null&&(mode==='local'||game.turn===seat)}
+function showMiniCards(target,cards){
+ target.classList.add('mini-hand');
+ for(const c of cards){
+  if(!c||typeof c.r!=='number')continue;
+  const card=document.createElement('span');
+  card.className='mini-playing-card'+((c.s===1||c.s===2)?' mini-red':'');
+  const rank=c.r===10?'10':'23456789TJQKA'[c.r-2];
+  card.textContent=rank+suits[c.s];
+  card.setAttribute('aria-label',rank+' of '+['spades','hearts','diamonds','clubs'][c.s]);
+  target.append(card);
+ }
+}
+function showMiniBacks(target,count){
+ target.classList.add('mini-hand','mini-back-hand');
+ for(let i=0;i<count;i++){const c=document.createElement('span');c.className='mini-blue-back';c.setAttribute('aria-label','Face-down card');target.append(c)}
+}
+function render(){if(!game)return;$('game').classList.remove('hidden');$('menu').classList.add('hidden');$('invite').classList.add('hidden');let me=player(),other=1-me;$('p0').textContent=game.names[0];$('p1').textContent=game.names[1];for(let p=0;p<2;p++)$('s'+p).textContent=game.lanes.filter(l=>l.owner===p).length;
+$('status').textContent=game.winner!==null?'🏆 '+game.names[game.winner]+' wins!':game.log+' '+(myTurn()?'Your move.':'Waiting for '+game.names[game.turn]+'…');$('lanes').replaceChildren();game.lanes.forEach((l,i)=>{let d=document.createElement('div');d.className='lane '+(l.owner===0?'player0':l.owner===1?'player1':'');let coin=document.createElement('div');coin.className='coin';coin.textContent=l.owner===null?'★':l.owner===0?'●':'◆';coin.style.background=l.owner===0?'radial-gradient(circle at 30% 25%,#b9f5ff,#42a7ca 55%,#215877)':l.owner===1?'radial-gradient(circle at 30% 25%,#ffdaab,#e27745 55%,#873e24)':'';coin.style.color=l.owner===0?'#15435a':l.owner===1?'#692f1c':'';coin.setAttribute('aria-label',l.owner===null?'Unclaimed coin':'Coin owned by player '+(l.owner+1));let top=document.createElement('div'),bot=document.createElement('div');top.className=bot.className='stack';top.textContent=l.plays[other]?(l.owner===null?'—':ranknames[evaluate(l.plays[other])[0]]):'—';bot.textContent=l.plays[me]?ranknames[evaluate(l.plays[me])[0]]:'—';let tc=document.createElement('div'),bc=document.createElement('div');tc.className=bc.className='tinycards';if(l.plays[other]){if(l.owner!==null)showMiniCards(tc,l.plays[other]);else showMiniBacks(tc,l.plays[other].length);}if(l.plays[me])showMiniCards(bc,l.plays[me]);d.append(top,tc,coin,bot,bc);$('lanes').append(d)});
+$('oppcards').replaceChildren();game.hands[other].forEach(()=>{let d=document.createElement('div');d.className='card back';$('oppcards').append(d)});$('hand').replaceChildren();game.hands[me].forEach((c,i)=>$('hand').append(cardEl(c,i,myTurn()&&game.phase==='submit')));let place=game.phase==='place';$('phase').textContent=game.winner!==null?'Game over':place?'Choose a coin position':'Choose your poker hand';$('hint').textContent=place?'Your opponent has submitted a hand. Choose its coin position.':'Select 1–5 cards to submit face down.';$('action').classList.toggle('hidden',place||game.winner!==null);$('action').disabled=!myTurn()||!selected.length;$('choices').replaceChildren();if(place&&myTurn())game.lanes.forEach((l,i)=>{if(l.owner!==null||l.plays[game.pending.by])return;let b=document.createElement('button');b.className='secondary';b.textContent='Coin '+(i+1);b.onclick=()=>move({type:'place',index:i});$('choices').append(b)});}
+function apply(g,m){if(g.winner!==null)return false;let p=g.turn;if(g.phase==='submit'&&m.type==='submit'){let ix=m.indices;if(!Array.isArray(ix)||ix.length<1||ix.length>5||new Set(ix).size!==ix.length||ix.some(i=>!Number.isInteger(i)||i<0||i>=g.hands[p].length))return false;let cards=ix.map(i=>g.hands[p][i]);g.hands[p]=g.hands[p].filter((_,i)=>!ix.includes(i));g.hands[p].push(...draw(g,3));g.pending={by:p,cards};g.phase='place';g.turn=1-p;g.log=g.names[p]+' submitted a face-down hand. '+g.names[1-p]+' chooses a position.';return true}if(g.phase==='place'&&m.type==='place'){let i=m.index,by=g.pending.by;if(!Number.isInteger(i)||i<0||i>6||g.lanes[i].owner!==null||g.lanes[i].plays[by])return false;let l=g.lanes[i];l.plays[by]=g.pending.cards;if(l.plays[0]&&l.plays[1]){let result=cmp(l.plays[0],l.plays[1]);if(result){l.owner=result>0?0:1;g.log=g.names[l.owner]+' captures coin '+(i+1)+'!'}else{l.plays=[null,null];g.log='Tie at coin '+(i+1)+'! Both hands discarded; coin remains free.'}}else g.log=g.names[by]+' placed a hand at coin '+(i+1)+'.';g.pending=null;g.phase='submit';g.turn=1-by;g.winner=win(g);return true}return false}
+function move(m){if(!myTurn())return;if(mode==='online'&&seat===1){conn.send({type:'move',move:m});selected=[];return}if(apply(game,m)){selected=[];sync();render()}}
+$('action').onclick=()=>move({type:'submit',indices:[...selected]});function publicGameForGuest(g){
+ const copy=structuredClone(g);
+ copy.hands[0]=g.hands[0].map(()=>({r:0,s:0,id:'hidden'}));
+ copy.deck=[];
+ for(const lane of copy.lanes){if(lane.owner===null&&lane.plays[0])lane.plays[0]=lane.plays[0].map(()=>({r:0,s:0,id:'hidden'}));}
+ if(copy.pending&&copy.pending.by===0)copy.pending.cards=copy.pending.cards.map(()=>({r:0,s:0,id:'hidden'}));
+ return copy;
+}
+function sync(){if(mode==='online'&&seat===0&&conn?.open)conn.send({type:'state',game:publicGameForGuest(game)})}function received(data){if(data.type==='host-waiting'&&seat===1){$('connection').textContent='Host is playing computer — please wait';$('status').textContent=(data.name||'Your friend')+' is finishing a computer match. You are connected and will join shortly.';$('invite').classList.add('hidden');$('menu').classList.add('hidden');$('game').classList.remove('hidden');return}if(data.type==='hello'&&window.waitingComputerActive?.()){window.waitingFriendArrived?.(data.name);if(conn?.open)conn.send({type:'host-waiting',name:$('name').value.trim()||'Player 1'});return}if(data.type==='state'&&seat===1){game=data.game;selected=[];render()}else if(data.type==='move'&&seat===0&&game&&game.turn===1&&apply(game,data.move)){selected=[];sync();render()}else if(data.type==='hello'&&seat===0){game.names[1]=(data.name||'Player 2').slice(0,24);if(game.names[0]===game.names[1])game.names[0]+=' (Host)';sync();render()}}
+function setupConn(c){conn=c;c.on('open',()=>{$('connection').textContent='● Connected';if(seat===1){c.send({type:'hello',name:$('name').value.trim()||'Player 2'});$('menu').classList.add('hidden');$('status').textContent='Waiting for game…'}else{if(window.waitingComputerActive?.()){c.send({type:'host-waiting',name:$('name').value.trim()||'Player 1'});window.waitingFriendArrived?.();}else{sync();render()}}});c.on('data',received);c.on('close',()=>{$('connection').textContent='Opponent disconnected'});c.on('error',e=>alert('Connection error: '+e.message))}
+$('local').onclick=()=>{mode='local';game=newGame();game.names=['Player 1','Player 2'];$('connection').textContent='Pass and play';render()};$('create').onclick=()=>{if(typeof Peer==='undefined')return alert('Could not load online library. Check internet access.');mode='online';seat=0;game=newGame();room='sevenhand-'+Math.random().toString(36).slice(2,10);peer=new Peer(room);peer.on('open',()=>{let url=new URL(location.href);url.searchParams.set('room',room);$('link').value=url.toString();$('qr').replaceChildren();if(typeof QRCode!=='undefined')new QRCode($('qr'),{text:url.toString(),width:170,height:170});$('invite').classList.remove('hidden');$('menu').classList.add('hidden');$('connection').textContent='Waiting for opponent'});peer.on('connection',c=>{if(conn?.open){c.on('open',()=>c.close());return}setupConn(c)});peer.on('error',e=>alert('Unable to create room: '+e.message))};function join(){room=$('roomcode').value.trim();if(!room)return alert('Enter a room code');if(typeof Peer==='undefined')return alert('Online library unavailable');mode='online';seat=1;peer=new Peer();peer.on('open',()=>setupConn(peer.connect(room,{reliable:true})));peer.on('error',e=>alert('Unable to connect: '+e.message))}$('join').onclick=join;$('copy').onclick=()=>{navigator.clipboard?.writeText($('link').value).then(()=>{$('copy').textContent='Copied!'})};let query=new URLSearchParams(location.search).get('room');if(query){$('roomcode').value=query;$('name').value='Player 2';$('joinbox').scrollIntoView({block:'nearest'})}
+
+// UI enhancement: chat alongside the table, with turn controls in a dialog.
+(function(){
+ const gameSection=$('game');
+ const layout=document.createElement('div');layout.className='game-layout';
+ const main=document.createElement('div');main.className='game-main';
+ while(gameSection.firstChild)main.appendChild(gameSection.firstChild);
+ layout.appendChild(main);gameSection.appendChild(layout);
+ const oldControls=main.querySelector('section.panel');oldControls.id='controls-original';
+ const chat=document.createElement('aside');chat.className='panel chat-panel chat-collapsed';
+ chat.innerHTML='<div class="chat-title"><h3>💬 Chat <span id="chat-unread" class="chat-unread hidden">New</span></h3><button class="secondary" id="chat-hide" type="button">×</button></div><div id="chat-messages" class="chat-messages" aria-live="polite"></div><form id="chat-form" class="chat-compose"><input id="chat-text" maxlength="500" placeholder="Message your opponent…" autocomplete="off" aria-label="Chat message"><button id="voice-record" type="button" title="Record voice message" aria-label="Record voice message">🎙️</button><button type="submit">Send</button></form><div id="voice-controls" class="hidden"><span id="voice-status">Recording…</span> <button type="button" id="voice-stop">Stop</button> <button type="button" id="voice-cancel" class="secondary">Cancel</button></div><div id="voice-preview" class="hidden"><audio id="voice-preview-audio" controls></audio><div class="flex"><button type="button" id="voice-send">Send voice</button><button type="button" id="voice-discard" class="secondary">Discard</button></div></div>';
+ layout.appendChild(chat);
+ const toggle=document.createElement('button');toggle.id='chat-toggle';toggle.innerHTML='💬 Chat <span id="chat-badge" class="chat-badge hidden" aria-label="Unread messages"></span>';document.body.appendChild(toggle);
+ const overlay=document.createElement('div');overlay.id='play-modal';overlay.className='play-modal hidden';overlay.innerHTML='<div class="play-dialog" role="dialog" aria-modal="true" aria-labelledby="play-title"><div class="modal-top"><h2 id="play-title">Your move</h2><button class="modal-close" id="modal-close" type="button" aria-label="Close dialog">×</button></div><div id="modal-content"></div></div>';
+ document.body.appendChild(overlay);
+ const content=$('modal-content');const phase=$('phase'),hint=$('hint'),action=$('action'),choices=$('choices');content.append(phase,hint,action,choices);
+ const launch=document.createElement('button');launch.className='move-launch hidden';launch.id='move-launch';launch.textContent='♠ Make your move';$('hand').insertAdjacentElement('afterend',launch);
+ let dismissed=false,lastKey='',unread=0;
+ function showModal(){dismissed=false;overlay.classList.remove('hidden');launch.classList.add('hidden')}
+ function hideModal(){dismissed=true;overlay.classList.add('hidden');if(game&&myTurn())launch.classList.remove('hidden')}
+ $('modal-close').onclick=hideModal;launch.onclick=()=>{if(game?.phase==='submit'){if(!selected.length)return;move({type:'submit',indices:[...selected]});}else showModal()};
+ function updateUnread(){const badge=$('chat-badge');badge.textContent=unread>9?'9+':String(unread);badge.classList.toggle('hidden',unread===0);$('chat-unread').classList.toggle('hidden',unread===0);$('chat-unread').textContent=unread+' new'}function notifyUnread(){if(chat.classList.contains('chat-collapsed')){unread++;updateUnread()}}toggle.onclick=()=>{chat.classList.toggle('chat-collapsed');if(!chat.classList.contains('chat-collapsed')){unread=0;updateUnread()}};$('chat-hide').onclick=()=>chat.classList.add('chat-collapsed');
+ function addChat(name,message,mine){const line=document.createElement('div');line.className='chat-line'+(mine?' mine':'');const who=document.createElement('div');who.className='who';who.textContent=name;const body=document.createElement('div');body.textContent=message;line.append(who,body);$('chat-messages').append(line);$('chat-messages').scrollTop=$('chat-messages').scrollHeight;if(!mine&&chat.classList.contains('chat-collapsed')){notifyUnread()}}
+ $('chat-form').onsubmit=e=>{e.preventDefault();const field=$('chat-text'),msg=field.value.trim();if(!msg||!game)return;if(mode==='online'&&!conn?.open){addChat('System','Opponent is disconnected; message not sent.',false);return}const me=mode==='local'?game.turn:seat;addChat(game.names[me]||'You',msg,true);if(mode==='online')conn.send({type:'chat',text:msg});field.value=''};
+
+ // Voice notes: short recordings are transmitted through the existing PeerJS data channel.
+ let recorder=null,stream=null,chunks=[],voiceBlob=null,voiceUrl=null,recordTimer=null,discardRecording=false;
+ const voiceControls=$('voice-controls'),voicePreview=$('voice-preview');
+ function releaseMic(){if(recordTimer){clearTimeout(recordTimer);recordTimer=null}if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
+ function resetVoice(){releaseMic();voiceControls.classList.add('hidden');voicePreview.classList.add('hidden');if(voiceUrl){URL.revokeObjectURL(voiceUrl);voiceUrl=null}voiceBlob=null;$('voice-record').disabled=false}
+ function addVoice(name,blob,mine){const line=document.createElement('div');line.className='chat-line'+(mine?' mine':'');const who=document.createElement('div');who.className='who';who.textContent=name;const player=document.createElement('audio');player.controls=true;player.preload='metadata';player.src=URL.createObjectURL(blob);line.append(who,player);$('chat-messages').append(line);$('chat-messages').scrollTop=$('chat-messages').scrollHeight;if(!mine&&chat.classList.contains('chat-collapsed')){notifyUnread()}}
+ $('voice-record').onclick=async()=>{if(mode!=='online'||!conn?.open){addChat('System','Voice messages require a connected online opponent.',false);return}if(!navigator.mediaDevices?.getUserMedia||typeof MediaRecorder==='undefined'){addChat('System','Voice recording is not supported in this browser.',false);return}try{stream=await navigator.mediaDevices.getUserMedia({audio:true});const types=['audio/webm;codecs=opus','audio/mp4','audio/webm'];const type=types.find(t=>MediaRecorder.isTypeSupported(t));recorder=new MediaRecorder(stream,type?{mimeType:type}:undefined);chunks=[];discardRecording=false;recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};recorder.onstop=()=>{releaseMic();voiceControls.classList.add('hidden');if(discardRecording){resetVoice();return}voiceBlob=new Blob(chunks,{type:recorder.mimeType||'audio/webm'});if(!voiceBlob.size||voiceBlob.size>1500000){addChat('System','Recording is too large. Try a shorter voice note.',false);resetVoice();return}voiceUrl=URL.createObjectURL(voiceBlob);$('voice-preview-audio').src=voiceUrl;voicePreview.classList.remove('hidden');$('voice-record').disabled=false};recorder.start();voiceControls.classList.remove('hidden');$('voice-record').disabled=true;recordTimer=setTimeout(()=>{if(recorder?.state==='recording')recorder.stop()},30000)}catch(e){releaseMic();addChat('System','Microphone unavailable: '+(e.message||'permission denied'),false)}};
+ $('voice-stop').onclick=()=>{if(recorder?.state==='recording')recorder.stop()};$('voice-cancel').onclick=()=>{discardRecording=true;if(recorder?.state==='recording')recorder.stop();else resetVoice()};$('voice-discard').onclick=resetVoice;
+ $('voice-send').onclick=async()=>{if(!voiceBlob||!conn?.open){addChat('System','Opponent disconnected; voice note not sent.',false);return}const blob=voiceBlob;const name=game?.names[seat]||'You';$('voice-send').disabled=true;try{const bytes=new Uint8Array(await blob.arrayBuffer());let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));conn.send({type:'voice',mime:blob.type,data:btoa(binary)});addVoice(name,blob,true);resetVoice()}catch(e){addChat('System','Could not send voice note: '+e.message,false)}finally{$('voice-send').disabled=false}};
+ const previousReceived=received;received=function(data){if(data&&data.type==='voice'){if(typeof data.data==='string'&&data.data.length<2100000&&/^audio\//.test(data.mime||'')){try{const raw=atob(data.data),bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));addVoice(game?.names[1-seat]||'Opponent',new Blob([bytes],{type:data.mime}),false)}catch(e){addChat('System','Could not play received voice note.',false)}}return}if(data&&data.type==='chat'){if(typeof data.text==='string'&&data.text.length<=500)addChat(game?.names[1-seat]||'Opponent',data.text,false);return}previousReceived(data)};
+ const originalRender=render;render=function(){originalRender();const canAct=!!game&&game.winner===null&&myTurn();const key=game?String(game.turn)+'/'+game.phase+'/'+(game.pending?.by??'')+'/'+(game.winner??'')+'/'+game.lanes.map(l=>l.owner===null?'_':l.owner).join(''):'';
+ if(key!==lastKey){lastKey=key;dismissed=false}
+ const shouldShow=canAct&&!dismissed&&game.phase==='place';
+ overlay.classList.toggle('hidden',!shouldShow);launch.classList.toggle('hidden',!canAct||shouldShow);launch.disabled=game?.phase==='submit'&&!selected.length;launch.textContent=game?.phase==='place'?'Choose coin position':'♠ Make your move';
+ $('play-title').textContent=game?.phase==='place'?'Choose a coin position':'Choose your poker hand';
+ if(game?.phase==='place'&&game.pending?.cards){
+  const n=game.pending.cards.length;
+  phase.textContent=n+' '+(n===1?'card':'cards')+' face down';
+  let preview=$('pending-card-preview');
+  if(!preview){preview=document.createElement('div');preview.id='pending-card-preview';preview.className='pending-card-preview';phase.insertAdjacentElement('afterend',preview);}
+  if(preview.childElementCount!==n){preview.replaceChildren();for(let i=0;i<n;i++){const card=document.createElement('div');card.className='card back pending-mini-card';card.setAttribute('aria-label','Face-down card '+(i+1));preview.append(card);}}
+  preview.classList.remove('hidden');
+  hint.textContent='Your opponent submitted '+n+' '+(n===1?'card':'cards')+' face down. Choose a coin position without seeing the cards.';
+ }else{$('pending-card-preview')?.classList.add('hidden');}
+ if(game?.winner!==null){overlay.classList.add('hidden');launch.classList.add('hidden')}
+ };
+})();
+</script><style>
+#recovery-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:9px 12px;margin:8px 0;border:1px solid #547263;border-radius:10px;background:#152b25;color:#e9e4d7;font-size:13px}
+#recovery-controls label{display:flex;gap:7px;align-items:center;cursor:pointer}#recovery-controls input{accent-color:#d8ad56}#recovery-note{color:#d8c88f}
+#chat-toggle .chat-badge{position:absolute;top:-9px;right:-8px;min-width:23px;height:23px;padding:2px 5px;border-radius:999px;background:#e32f43;color:#fff;border:2px solid #142620;box-shadow:0 2px 8px #0008;font-size:12px;font-weight:900;line-height:17px;text-align:center}#chat-toggle .chat-badge.hidden{display:none!important}</style>
+<script>
+/* Connection resilience: host remains authoritative; only host snapshots are restored. */
+(function(){
+ const $=id=>document.getElementById(id), KEY='sevenhand-recovery-v2';
+ const bar=document.createElement('div');bar.id='recovery-controls';bar.innerHTML='<label><input type="checkbox" id="stay-awake"> Keep screen awake</label><span id="recovery-note" role="status">Ready</span>';
+ document.querySelector('.top').insertAdjacentElement('afterend',bar);
+ let wake=null, reconnectTimer=null, attempts=0, generation=0, restoring=false, everConnected=false;
+ const note=t=>{$('recovery-note').textContent=t};
+ function save(){if(mode!=='online'||!room)return;try{sessionStorage.setItem(KEY,JSON.stringify({mode,seat,room,name:$('name').value,game:seat===0?game:null,at:Date.now()}))}catch(e){}}
+ function saved(){try{const d=JSON.parse(sessionStorage.getItem(KEY)||'null');return d&&d.room&&Date.now()-d.at<24*3600000?d:null}catch(e){return null}}
+ async function wakeOn(){if(!$('stay-awake').checked||document.visibilityState!=='visible'||!('wakeLock'in navigator))return;try{wake=await navigator.wakeLock.request('screen');note('Screen awake · game active');wake.addEventListener('release',()=>{wake=null})}catch(e){note('Screen wake lock unavailable on this device')}}
+ async function wakeOff(){if(wake){try{await wake.release()}catch(e){}wake=null}}
+ $('stay-awake').addEventListener('change',()=>{if($('stay-awake').checked)wakeOn();else wakeOff()});
+ function cancelRetry(){if(reconnectTimer){clearTimeout(reconnectTimer);reconnectTimer=null}}
+ function retrySoon(){if(mode!=='online'||!room||conn?.open)return;cancelRetry();const delay=Math.min(15000,1200*Math.pow(1.6,Math.min(attempts++,6)));note('Opponent disconnected — reconnecting…');$('connection').textContent='Reconnecting…';reconnectTimer=setTimeout(reconnect,delay)}
+ function reconnect(){reconnectTimer=null;if(mode!=='online'||!room||conn?.open)return;
+ if(seat===0){if(peer&&!peer.destroyed&&!peer.disconnected){note('Room active — waiting for opponent');return}try{if(peer&&!peer.destroyed&&peer.disconnected){peer.reconnect();note('Reopening room…');return}startHost(room,true)}catch(e){retrySoon()}}
+ else{if(!peer||peer.destroyed){startGuest(room);return}if(peer.disconnected){try{peer.reconnect();note('Reconnecting to room…')}catch(e){startGuest(room)}return}connectGuest()}}
+ function attach(c){if(!c)return;const token=++generation;setupConn(c);
+ c.on('open',()=>{if(token!==generation)return;everConnected=true;attempts=0;cancelRetry();save();note('Connected · match synchronized');if(seat===0)sync()});
+ c.on('close',()=>{if(token!==generation)return;retrySoon()});
+ c.on('error',()=>{if(token!==generation)return;retrySoon()});}
+ function connectGuest(){if(mode!=='online'||seat!==1||!room||!peer||peer.destroyed||peer.disconnected||conn?.open)return;
+ try{const c=peer.connect(room,{reliable:true});attach(c);note('Connecting to host…');setTimeout(()=>{if(conn===c&&!c.open){try{c.close()}catch(e){}retrySoon()}},11000)}catch(e){retrySoon()}}
+ function hostConnected(c){if(conn?.open){c.on('open',()=>c.close());return}attach(c)}
+ function startHost(id,recovered){if(typeof Peer==='undefined'){note('PeerJS unavailable');return}if(peer&&!peer.destroyed){try{peer.destroy()}catch(e){}}
+ peer=new Peer(id);peer.on('open',()=>{attempts=0;save();note(recovered?'Room restored — waiting for opponent':'Room ready — share invitation');let url=new URL(location.href);url.searchParams.set('room',room);$('link').value=url.toString();$('qr').replaceChildren();if(typeof QRCode!=='undefined')new QRCode($('qr'),{text:url.toString(),width:170,height:170});if(!everConnected){$('invite').classList.remove('hidden');$('menu').classList.add('hidden')}else if(game)render()});
+ peer.on('connection',hostConnected);peer.on('disconnected',retrySoon);peer.on('error',e=>{if(e.type==='unavailable-id'){note('Room ID occupied — close duplicate host tabs');return}retrySoon()})}
+ function startGuest(id){if(typeof Peer==='undefined'){note('PeerJS unavailable');return}if(peer&&!peer.destroyed){try{peer.destroy()}catch(e){}}
+ peer=new Peer();peer.on('open',connectGuest);peer.on('disconnected',retrySoon);peer.on('error',retrySoon)}
+ // Replace UI handlers to preserve room ID and resume instead of creating a new match.
+ $('create').onclick=()=>{if(typeof Peer==='undefined')return alert('Online library unavailable');cancelRetry();mode='online';seat=0;everConnected=false;game=newGame();selected=[];room='sevenhand-'+Math.random().toString(36).slice(2,10);save();startHost(room,false)};
+ $('join').onclick=()=>{const id=$('roomcode').value.trim();if(!id)return alert('Enter a room code');cancelRetry();mode='online';seat=1;room=id;everConnected=false;save();startGuest(room)};
+ const oldSync=sync;sync=function(){save();oldSync()};
+ const oldReceived=received;received=function(data){oldReceived(data);if(data?.type==='state'&&seat===1){everConnected=true;save();note('Match synchronized')}if(data?.type==='hello'&&seat===0)save()};
+ const oldRender=render;render=function(){oldRender();if(mode==='online'&&seat===0)save()};
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){wakeOn();if(mode==='online'){if(conn?.open){note('Connected')}else{attempts=0;reconnect()}}}else{save()}});
+ window.addEventListener('online',()=>{if(mode==='online'&&!conn?.open)reconnect()});
+ window.addEventListener('pagehide',save);
+ // Keep snapshots fresh even if host is idle; guest snapshots contain no authoritative game.
+ setInterval(()=>{if(mode==='online'){save();if(!conn?.open&&!reconnectTimer)retrySoon()}},8000);
+ const freshHome=new URLSearchParams(location.search).has('home');if(freshHome){try{sessionStorage.removeItem(KEY)}catch(e){}} if(freshHome){const clean=new URL(location.href);clean.searchParams.delete('home');history.replaceState(null,'',clean.toString())} const d=freshHome?null:saved();if(d&&typeof Peer!=='undefined'){
+ mode='online';seat=d.seat;room=d.room;$('name').value=d.name||('Player '+(seat+1));$('roomcode').value=room;
+ if(seat===0&&d.game){game=d.game;everConnected=true;render();note('Saved match restored — reconnecting opponent');startHost(room,true)}
+ else if(seat===1){everConnected=true;note('Rejoining saved match…');startGuest(room)}
+ }else if(new URLSearchParams(location.search).get('room')){const id=new URLSearchParams(location.search).get('room');$('roomcode').value=id;note('Invitation ready — join room')}
+ if(!('wakeLock'in navigator)){$('stay-awake').disabled=true;$('stay-awake').parentElement.title='Screen Wake Lock not supported in this browser'}
+})();
+</script><style>
+/* Keep the chat trigger anchored on mobile, including when unread badges appear. */
+@media(max-width:850px){#chat-toggle{position:fixed!important;right:14px!important;bottom:calc(14px + env(safe-area-inset-bottom, 0px))!important;left:auto!important;top:auto!important;z-index:95!important}}
+.top h1{cursor:pointer}.top h1:hover{text-decoration:underline;text-underline-offset:5px}
+</style>
+<script>
+/* Explicitly leave a match before returning home; don't restore it on navigation. */
+(function(){
+ const heading=document.querySelector('.top h1');if(!heading)return;
+ heading.setAttribute('role','link');heading.setAttribute('tabindex','0');heading.setAttribute('title','Return to game homepage and start a new match');
+ function goHome(){
+  if(typeof game!=='undefined'&&game&&!confirm('Leave this match and return to the homepage? You will lose your current match progress.'))return;
+  try{sessionStorage.removeItem('sevenhand-recovery-v2')}catch(e){}
+  // Prevent pagehide and reconnect timers from saving the abandoned match again.
+  try{mode='';room='';game=null}catch(e){}
+  try{if(typeof conn!=='undefined'&&conn)conn.close()}catch(e){}
+  try{if(typeof peer!=='undefined'&&peer)peer.destroy()}catch(e){}
+  const home=new URL(location.href);home.searchParams.delete('room');home.searchParams.delete('v');home.searchParams.set('home','1');home.hash='';
+  location.replace(home.toString());
+ }
+ heading.addEventListener('click',goHome);
+ heading.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goHome()}});
+})();
+</script><script>
+/* MSN Nudge: transmitted on the existing private PeerJS connection. */
+(function(){
+ const icon='data:image/png;base64,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';
+ const toolbar=document.createElement('div');toolbar.className='msn-toolbar';
+ const nudge=document.createElement('button');nudge.type='button';nudge.id='msn-nudge';
+ const img=document.createElement('img');img.className='msn-nudge-icon';img.src=icon;img.alt='';
+ nudge.append(img);nudge.title='Nudge your friend';nudge.setAttribute('aria-label','Send a Nudge');
+ const help=document.createElement('span');help.className='msn-nudge-note';help.textContent='Give your friend a classic Messenger window shake.';
+ toolbar.append(nudge);
+ const chat=document.getElementById('chat-panel')||document.querySelector('.chat-panel');
+ if(chat){const compose=chat.querySelector('.chat-compose');if(compose)compose.insertAdjacentElement('beforebegin',toolbar);else chat.append(toolbar)}
+ else{const gameEl=document.getElementById('game');if(gameEl)gameEl.append(toolbar)}
+ let lastSent=0,shakeTimer=0,toastTimer=0;
+ function shake(sender){
+  document.body.classList.remove('msn-shaking');void document.body.offsetWidth;
+  document.body.classList.add('msn-shaking');clearTimeout(shakeTimer);shakeTimer=setTimeout(()=>document.body.classList.remove('msn-shaking'),720);
+  document.querySelector('.msn-nudge-toast')?.remove();
+  const toast=document.createElement('div');toast.className='msn-nudge-toast';toast.setAttribute('role','status');toast.textContent=sender.startsWith('You sent ')?sender:sender+' sent you a Nudge!';document.body.append(toast);
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.remove(),2400);
+ }
+ nudge.addEventListener('click',()=>{
+  if(typeof mode==='undefined'||mode!=='online'||!conn?.open){alert('Connect with a friend to send a Nudge.');return}
+  const now=Date.now();if(now-lastSent<5000)return;lastSent=now;
+  try{conn.send({type:'nudge',from:seat});shake('You sent '+(game?.names?.[1-seat]||'Player '+(2-seat))+' a Nudge!');nudge.disabled=true;setTimeout(()=>nudge.disabled=false,5000)}catch(e){alert('Could not send the Nudge. Please reconnect.')}
+ });
+ const prior=received;
+ received=function(data){if(data&&data.type==='nudge'){shake((game?.names?.[1-seat])||'Player '+(2-seat));return}return prior(data)};
+})();
+</script>
+<script>
+/* Local Web Audio effects, no audio files or extra requests. All sounds start only after a user gesture. */
+(()=>{
+ let enabled=localStorage.getItem('sevenhand-sound')!=='off';
+ let ctx=null,previous=null,ready=false;
+ const toggle=document.createElement('button');toggle.type='button';toggle.id='msn-sound-toggle';toggle.className='msn-sound-toggle';
+ function refresh(){toggle.textContent=enabled?'🔊':'🔇';toggle.title=enabled?'Mute game sounds':'Unmute game sounds';toggle.setAttribute('aria-label',toggle.title);toggle.setAttribute('aria-pressed',String(enabled))}
+ refresh();const target=document.querySelector('.top');if(target)target.append(toggle);
+ toggle.addEventListener('click',()=>{enabled=!enabled;localStorage.setItem('sevenhand-sound',enabled?'on':'off');refresh();if(enabled)play('select')});
+ function context(){if(!enabled)return null;try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume().catch(()=>{});return ctx}catch(e){return null}}
+ function tone(f,when,duration,volume,type='sine'){
+  const a=context();if(!a)return;const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.setValueAtTime(f,a.currentTime+when);g.gain.setValueAtTime(.0001,a.currentTime+when);g.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),a.currentTime+when+.012);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+when+duration);o.connect(g);g.connect(a.destination);o.start(a.currentTime+when);o.stop(a.currentTime+when+duration+.01)
+ }
+ function play(kind){if(!enabled)return;
+  if(kind==='select'){tone(480,0,.055,.025,'triangle')}
+  else if(kind==='deal'){tone(330,0,.075,.025,'triangle');tone(440,.08,.07,.025,'triangle');tone(550,.16,.07,.018,'triangle')}
+  else if(kind==='place'){tone(390,0,.08,.035,'triangle');tone(290,.09,.1,.025,'triangle')}
+  else if(kind==='capture'){tone(523,0,.12,.055);tone(659,.12,.12,.05);tone(784,.24,.22,.055)}
+  else if(kind==='win'){[523,659,784,1047].forEach((n,i)=>tone(n,i*.13,.25,.05))}
+  else if(kind==='nudge'){tone(340,0,.09,.045,'square');tone(285,.12,.1,.04,'square');tone(350,.25,.09,.035,'square')}
+ }
+ // Enable audio on actual interaction; avoid autoplay restrictions.
+ document.addEventListener('pointerdown',()=>{if(enabled)context()},{once:true});
+ function snapshot(){if(!game)return null;return {phase:game.phase,turn:game.turn,winner:game.winner,log:game.log,owned:game.lanes.map(l=>l.owner),counts:game.hands.map(h=>h.length)}}
+ function effects(before,after){if(!before||!after)return;
+  const changed=after.owned.map((o,i)=>o!==null&&o!==before.owned[i]?i:-1).filter(i=>i>=0);
+  if(after.winner!==null&&before.winner===null){play('win');document.querySelector('.felt')?.classList.add('msn-win-flash')}
+  else if(changed.length){play('capture')}
+  else if(before.phase==='submit'&&after.phase==='place')play('deal');
+  else if(before.phase==='place'&&after.phase==='submit')play('place');
+  if(changed.length){const lanes=document.querySelectorAll('.lane');changed.forEach(i=>lanes[i]?.classList.add('msn-captured'))}
+  if(before.phase!==after.phase){const cards=document.querySelectorAll('#hand .card');cards.forEach((c,i)=>{if(i<3){c.classList.add('msn-dealing');c.style.animationDelay=(i*75)+'ms'}})}
+ }
+ // Hook render to detect local moves and synchronized remote moves, including guest updates.
+ const originalRender=render;
+ render=function(...args){const after=snapshot();const before=previous;const result=originalRender(...args);if(ready)effects(before,after);previous=after;ready=true;return result};
+ // Card selection click sound without changing existing selection logic.
+ document.addEventListener('click',e=>{if(e.target.closest('#hand .card'))play('select')});
+ // Nudge audio is local for sender and receiver, while the original shaking logic remains unchanged.
+ const nudge=document.getElementById('msn-nudge');if(nudge)nudge.addEventListener('click',()=>{if(mode==='online'&&conn?.open)play('nudge')});
+ const priorReceived=received;received=function(data){if(data?.type==='nudge')play('nudge');return priorReceived(data)};
+})();
+</script>
+<script id="tribute-and-results-script">
+(function(){
+ const el=id=>document.getElementById(id),KEY='sevenhand-msn-scoreboard-v1';
+ let recorded='',rematchPending=false,requestPending=false;
+ const layer=document.createElement('div');layer.id='match-result';layer.className='hidden';layer.innerHTML='<div class="result-window" role="dialog" aria-modal="true" aria-labelledby="result-title"><div class="result-trophy">🏆</div><h2 id="result-title">Victory!</h2><p id="result-detail"></p><div class="result-stats"><div class="result-stat"><span id="result-name0">Player 1</span><b id="result-coins0">0</b>coins</div><div class="result-stat"><span id="result-name1">Player 2</span><b id="result-coins1">0</b>coins</div></div><div class="result-scoreboard"><strong>🏅 Match scoreboard (this browser)</strong><table><thead><tr><th>Player</th><th>Wins</th></tr></thead><tbody id="result-rows"></tbody></table></div><div class="result-actions"><button id="result-rematch">🔄 Rematch</button><button id="result-close" class="secondary">View final table</button></div><p id="result-wait" class="result-note"></p><p class="result-note">Scores are saved in this browser. Clearing site data or changing browsers resets this scoreboard.</p></div>';
+ document.body.append(layer);
+ const back=document.createElement('button');back.id='back-to-results';back.textContent='🏆 Back to Results / Rematch';back.className='secondary';back.style.cssText='display:none;position:fixed;right:18px;bottom:72px;z-index:500;padding:12px 18px;box-shadow:0 5px 18px #1237';document.body.append(back);
+ back.onclick=()=>{if(game?.winner!==null){layer.classList.remove('hidden');back.style.display='none'}};
+ el('result-close').onclick=()=>{layer.classList.add('hidden');back.style.display='block'};
+ const notification=document.createElement('div');notification.id='rematch-notification';notification.hidden=true;notification.setAttribute('role','alertdialog');notification.setAttribute('aria-label','Rematch invitation');notification.innerHTML='<strong id="rematch-notification-title">Rematch invitation</strong><p id="rematch-notification-text"></p><div style="display:flex;gap:10px;justify-content:center"><button id="rematch-yes">✓ Accept</button><button id="rematch-no" class="secondary">Decline</button></div>';document.body.append(notification);
+ let pendingInvite=null;
+ function invite(kind){pendingInvite=kind;notification.hidden=false;el('rematch-notification-title').textContent='🔔 Rematch requested!';el('rematch-notification-text').textContent=(kind==='request'?game.names[1]:game.names[0])+' wants to play another match.';try{notification.animate([{transform:'translateX(-50%) scale(.95)'},{transform:'translateX(-50%) scale(1)'}],{duration:180})}catch(e){}}
+ function clearInvite(){notification.hidden=true;pendingInvite=null}
+ el('rematch-no').onclick=()=>{if(conn?.open)conn.send({type:'rematch-decline'});clearInvite()};
+ el('rematch-yes').onclick=()=>{const kind=pendingInvite;clearInvite();if(kind==='request'&&seat===0){rematchPending=true;conn?.send({type:'rematch-offer'});el('result-wait').textContent='Rematch offer sent. Waiting for acceptance…'}else if(kind==='offer'&&seat===1){conn?.send({type:'rematch-accept'});layer.classList.add('hidden');back.style.display='none';el('result-wait').textContent='Starting new match…'}};
+ function scores(){try{const x=JSON.parse(localStorage.getItem(KEY)||'{}');return x&&typeof x==='object'?x:{}}catch(e){return {}}}
+ function saveScore(){if(!game||game.winner===null)return;const id=(room||'local')+':'+game.winner+':'+game.lanes.map(l=>l.owner===null?'x':l.owner).join('')+':'+game.names.join('|');if(recorded===id)return;recorded=id;
+ // Only the authoritative host (or pass-and-play browser) records a match.
+ if(mode==='online'&&seat!==0)return;
+ const board=scores();const name=game.names[game.winner];board[name]=(Number(board[name])||0)+1;try{localStorage.setItem(KEY,JSON.stringify(board))}catch(e){}
+ }
+ function show(){if(!game||game.winner===null)return;saveScore();const winner=game.winner;el('result-title').textContent=game.names[winner]+' wins!';el('result-detail').textContent='Congratulations! '+game.names[winner]+' captured the winning combination.';
+ for(let p=0;p<2;p++){el('result-name'+p).textContent=game.names[p];el('result-coins'+p).textContent=game.lanes.filter(l=>l.owner===p).length}
+ const rows=el('result-rows');rows.replaceChildren();const board=scores();for(const [name,wins] of Object.entries(board).sort((a,b)=>b[1]-a[1]).slice(0,12)){const tr=document.createElement('tr'),n=document.createElement('td'),w=document.createElement('td');n.textContent=name;w.textContent=String(wins);tr.append(n,w);rows.append(tr)}
+ if(!rows.children.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=2;td.textContent='No locally recorded wins yet.';tr.append(td);rows.append(tr)}
+ el('result-wait').textContent=mode==='online'&&seat===1?'Request a rematch from the host.':'Start another match with the same players.';
+ layer.classList.remove('hidden')}
+ function begin(){if(!game||game.winner===null)return;const names=[...game.names];game=newGame();game.names=names;selected=[];recorded='';rematchPending=false;requestPending=false;layer.classList.add('hidden');back.style.display='none';clearInvite();if(mode==='online'&&seat===0)sync();render()}
+ el('result-rematch').onclick=()=>{if(!game||game.winner===null)return;if(mode==='local'){begin();return}if(!conn?.open){el('result-wait').textContent='Opponent is disconnected. Reconnect to request a rematch.';return}if(seat===0){rematchPending=true;conn.send({type:'rematch-offer'});el('result-wait').textContent='Rematch invitation sent. Waiting for your opponent…'}else{requestPending=true;conn.send({type:'rematch-request'});el('result-wait').textContent='Rematch requested. Waiting for the host…'}};
+ const priorReceived=received;received=function(d){
+ if(d?.type==='rematch-request'&&seat===0){if(game?.winner!==null)invite('request');return}
+ if(d?.type==='rematch-offer'&&seat===1){if(game?.winner!==null)invite('offer');return}
+ if(d?.type==='rematch-decline'){rematchPending=false;requestPending=false;el('result-wait').textContent='Your opponent declined the rematch.';return}
+ if(d?.type==='rematch-accept'&&seat===0&&rematchPending){begin();return}
+ return priorReceived(d)};
+ const priorRender=render;render=function(...args){const previous=game?.winner;const result=priorRender(...args);if(game?.winner!==null){const id=(room||'local')+':'+game.winner+':'+game.lanes.map(l=>l.owner===null?'x':l.owner).join('')+':'+game.names.join('|');if(recorded!==id||!layer.dataset.match||layer.dataset.match!==id){layer.dataset.match=id;show()}}else{layer.classList.add('hidden');back.style.display='none';clearInvite();layer.dataset.match=''}return result};
+ // Preserve the original game rules, chat, nudges, sounds and online pairing.
+})();
+</script>
+<style id="placed-blue-card-motion">
+.felt .mini-back-hand{min-height:35px!important;display:flex!important;justify-content:center!important;gap:3px!important;align-items:center!important}
+.felt .mini-blue-back,.flying-blue-back{display:inline-block;flex:none;width:22px;height:32px;border:2px solid #f5f9ff;border-radius:4px;background:repeating-linear-gradient(45deg,#1b4267 0 4px,#3872a5 4px 7px);box-shadow:inset 0 0 0 1px #9dc6e7,0 2px 4px #0006;position:relative}
+.felt .mini-blue-back::after,.flying-blue-back::after{content:'✦';position:absolute;inset:5px 3px;border:1px solid #c6e1f7;color:white;display:grid;place-items:center;font-size:12px;line-height:1}
+.flying-blue-back{position:fixed;z-index:350;pointer-events:none;transition:transform .56s cubic-bezier(.22,.8,.28,1),opacity .56s ease;will-change:transform}
+@media(max-width:760px){.felt .mini-blue-back{width:15px;height:24px;border-width:1px}.felt .mini-blue-back::after{inset:3px 2px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){.flying-blue-back{transition:none}}
+</style>
+<script>
+(function(){
+ let previous=Array(7).fill('');
+ const originalRender=render;
+ render=function(){
+   const old=previous;
+   const me=game?(mode==='local'?game.turn:seat):0;
+   const other=1-me;
+   const next=game?game.lanes.map(l=>l.plays[other]&&l.owner===null?String(l.plays[other].length):''):Array(7).fill('');
+   originalRender();previous=next;
+   if(!game||!document.getElementById('lanes'))return;
+   const newly=next.findIndex((n,i)=>n&&!old[i]);
+   if(newly<0||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+   const dest=document.querySelectorAll('#lanes .lane')[newly]?.querySelector('.mini-back-hand');
+   const source=document.getElementById('oppcards');
+   if(!dest||!source||!source.children.length)return;
+   const from=source.children[0].getBoundingClientRect(),to=dest.getBoundingClientRect();
+   if(!from.width||!to.width)return;
+   const count=Math.min(Number(next[newly]),5);
+   for(let i=0;i<count;i++){
+     const card=document.createElement('div');card.className='flying-blue-back';
+     const startX=from.left+from.width/2-11+(i-(count-1)/2)*5;
+     const startY=from.top+from.height/2-16;
+     const endX=to.left+to.width/2-11+(i-(count-1)/2)*25;
+     const endY=to.top+to.height/2-16;
+     card.style.left=startX+'px';card.style.top=startY+'px';document.body.append(card);
+     requestAnimationFrame(()=>requestAnimationFrame(()=>{card.style.transform='translate('+(endX-startX)+'px,'+(endY-startY)+'px)';card.style.opacity='0.2'}));
+     setTimeout(()=>card.remove(),700);
+   }
+ }
+})();
+</script>
+<style id="mini-card-proportions-fix">
+/* Keep the same card aspect ratio at every viewport; overlap rather than squeeze. */
+.felt .lane>.tinycards:nth-child(2).mini-back-hand{display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:nowrap!important;gap:0!important;overflow:visible!important;height:35px!important;min-height:35px!important;max-height:35px!important;padding:0 2px!important}
+.felt .lane>.tinycards:nth-child(2) .mini-blue-back{box-sizing:border-box!important;display:block!important;flex:0 0 22px!important;min-width:22px!important;width:22px!important;max-width:22px!important;height:32px!important;min-height:32px!important;max-height:32px!important;border:2px solid #f5f9ff!important;border-radius:4px!important;position:relative!important;transform:none!important}
+.felt .lane>.tinycards:nth-child(2) .mini-blue-back:not(:first-child){margin-left:-8px!important}
+.felt .lane>.tinycards:nth-child(2) .mini-blue-back::after{inset:5px 3px!important;font-size:12px!important;border-width:1px!important}
+@media(max-width:760px){
+.felt .lane>.tinycards:nth-child(2) .mini-blue-back{flex-basis:18px!important;min-width:18px!important;width:18px!important;max-width:18px!important;height:27px!important;min-height:27px!important;max-height:27px!important}
+.felt .lane>.tinycards:nth-child(2) .mini-blue-back:not(:first-child){margin-left:-9px!important}
+.felt .lane>.tinycards:nth-child(2) .mini-blue-back::after{inset:4px 2px!important;font-size:10px!important}
+}
+@media(max-width:420px){.felt .lane>.tinycards:nth-child(2) .mini-blue-back:not(:first-child){margin-left:-12px!important}}
+</style>
+<style id="msn-video-call-style">
+.msn-call-buttons{display:flex;gap:5px}.msn-call-buttons button{padding:5px 8px!important;font-size:12px!important}
+#msn-call-panel{background:#e8f5ff;border:1px solid #8bbbe0;border-radius:7px;padding:9px;margin:7px 0;color:#194e7d}
+#msn-call-panel.hidden{display:none!important}.msn-video-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}
+.msn-video-grid video{width:100%;aspect-ratio:4/3;object-fit:cover;background:#173952;border-radius:6px}
+.msn-video-grid small{display:block;text-align:center;color:#275c86}.msn-call-controls{display:flex;gap:5px;flex-wrap:wrap}
+#msn-call-status{font-size:12px;font-weight:bold;margin:5px 0;color:#174f85}
+</style>
+<style id="msn-call-minimized-alert">
+#chat-toggle #msn-call-badge{position:absolute;right:0;bottom:calc(100% + 7px);white-space:nowrap;background:linear-gradient(#fff,#d1eaff);color:#124b81;border:2px solid #4c96d0;border-radius:8px;padding:6px 10px;font:700 13px Tahoma,Arial,sans-serif;box-shadow:0 4px 16px #184d7b55;pointer-events:none}
+#chat-toggle #msn-call-badge.hidden{display:none!important}
+#chat-toggle.msn-call-attention{border-color:#e69b2a!important;box-shadow:0 0 0 4px #ffce71aa,0 4px 18px #174d88aa!important;animation:msnCallAttention 1.2s ease-in-out infinite}
+@keyframes msnCallAttention{50%{box-shadow:0 0 0 8px #ffce7122,0 4px 18px #174d88aa}}
+@media(prefers-reduced-motion:reduce){#chat-toggle.msn-call-attention{animation:none}}
+</style>
+<style id="msn-floating-call-style">
+#msn-call-panel.msn-floating{position:fixed!important;right:16px;top:105px;left:auto;bottom:auto;width:min(320px,calc(100vw - 24px));max-height:calc(100vh - 125px);overflow:auto;z-index:180;box-shadow:0 9px 32px #0a3a6480!important;border:2px solid #5699d1!important;background:linear-gradient(#f7fcff,#d8edff)!important;resize:both;min-width:225px;min-height:110px}
+#msn-call-panel.msn-floating .msn-call-drag{display:flex}
+.msn-call-drag{display:none;align-items:center;justify-content:space-between;gap:8px;background:linear-gradient(#e7f5ff,#9bc9f0);border:1px solid #76aad4;border-radius:5px;padding:5px 7px;margin-bottom:5px;cursor:move;touch-action:none;color:#14568f;font-weight:700;font-size:12px}
+.msn-call-drag button{padding:3px 7px!important;font-size:12px!important;cursor:pointer}
+#msn-call-panel.msn-floating.msn-mini .msn-video-grid,#msn-call-panel.msn-floating.msn-mini .msn-call-controls{display:none!important}
+#msn-call-panel.msn-floating.msn-mini{width:230px!important;min-height:0;resize:none}
+#msn-call-panel.msn-floating .msn-video-grid video{aspect-ratio:4/3;max-height:135px}
+#msn-call-panel.msn-audio .msn-video-grid video{display:none!important}
+#msn-call-panel .msn-wave{display:none;width:100%;height:88px;border-radius:6px;background:#173952}
+#msn-call-panel.msn-audio .msn-wave{display:block}
+#msn-call-panel.msn-audio .msn-video-grid{grid-template-columns:1fr 1fr}
+#msn-call-panel.msn-audio .msn-video-grid>div{min-width:0}
+#msn-call-panel.msn-audio .msn-video-grid small{font-weight:700}
+@media(max-width:650px){#msn-call-panel.msn-floating{right:8px;top:70px;width:min(265px,calc(100vw - 16px))}#msn-call-panel.msn-audio .msn-wave{height:65px}}
+@media(prefers-reduced-motion:reduce){#msn-call-panel .msn-wave{animation:none}}
+</style>
+<script id="msn-video-call-script">
+(function(){
+ const $=id=>document.getElementById(id);
+ const title=document.querySelector('.chat-title');if(!title)return;
+ const buttons=document.createElement('div');buttons.className='msn-call-buttons';
+ buttons.innerHTML='<button id="msn-call-start" type="button" title="Video call">📹 Call</button><button id="msn-call-audio" type="button" title="Audio-only call">☎ Audio</button>';
+ title.insertBefore(buttons,$('chat-hide'));
+ const panel=document.createElement('div');panel.id='msn-call-panel';panel.className='hidden';
+ panel.innerHTML='<div id="msn-call-status" role="status">Ready</div><div class="msn-video-grid"><div><video id="msn-local-video" autoplay muted playsinline></video><small>You</small></div><div><video id="msn-remote-video" autoplay playsinline></video><small>Opponent</small></div></div><div class="msn-call-controls"><button id="msn-call-accept" class="hidden" type="button">✔ Accept</button><button id="msn-call-decline" class="hidden" type="button">✕ Decline</button><button id="msn-call-mute" class="hidden" type="button">🎙 Mute</button><button id="msn-call-camera" class="hidden" type="button">📹 Camera off</button><button id="msn-call-end" class="hidden" type="button">☎ End call</button></div>';
+ title.insertAdjacentElement('afterend',panel);
+ // The live call floats independently of Chat so the poker table stays playable.
+ const originalPanelParent=panel.parentNode,originalPanelNext=panel.nextSibling;
+ const dragBar=document.createElement('div');dragBar.className='msn-call-drag';
+ dragBar.innerHTML='<span>☎ MSN Call · drag to move</span><span><button id="msn-call-dock" type="button" title="Return call to Chat">↩ Dock</button> <button id="msn-call-minimize" type="button" title="Minimize call">▁</button> <button id="msn-call-expand" type="button" title="Restore call">▣</button></span>';
+ panel.prepend(dragBar);
+ for(const id of ['msn-local-video','msn-remote-video']){const v=$(id),canvas=document.createElement('canvas');canvas.className='msn-wave';canvas.width=180;canvas.height=88;canvas.setAttribute('aria-label',id==='msn-local-video'?'Your audio level':'Opponent audio level');v.insertAdjacentElement('afterend',canvas)}
+ let callKind='video',waveFrame=0,waveContext=null,waveSources=[],waveAnalyzers=[];
+ function floatPanel(){if(!panel.classList.contains('msn-floating')){document.body.append(panel);panel.classList.add('msn-floating');panel.classList.remove('msn-mini');panel.style.left='';panel.style.top='';panel.style.right='16px'}}
+ function dockPanel(){panel.classList.remove('msn-floating','msn-mini');panel.style.left='';panel.style.top='';panel.style.right='';if(originalPanelNext&&originalPanelNext.parentNode===originalPanelParent)originalPanelParent.insertBefore(panel,originalPanelNext);else originalPanelParent.append(panel)}
+ const dockToggle=document.createElement('button');dockToggle.id='msn-call-undock';dockToggle.type='button';dockToggle.textContent='↗ Float call';dockToggle.title='Move the call into a floating window';dockToggle.className='hidden';panel.insertBefore(dockToggle,panel.querySelector('#msn-call-status'));
+ function setDocked(docked){if(docked){dockPanel();dockToggle.classList.remove('hidden');const chat=document.querySelector('.chat-panel');if(chat){chat.classList.remove('chat-collapsed');chat.classList.remove('hidden')} }else{floatPanel();dockToggle.classList.add('hidden')}}
+ $('msn-call-dock').onclick=()=>setDocked(true);
+ dockToggle.onclick=()=>setDocked(false);
+ $('msn-call-minimize').onclick=()=>panel.classList.toggle('msn-mini');
+ $('msn-call-expand').onclick=()=>panel.classList.remove('msn-mini');
+ let drag=null;dragBar.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const r=panel.getBoundingClientRect();drag={dx:e.clientX-r.left,dy:e.clientY-r.top};dragBar.setPointerCapture(e.pointerId)});
+ dragBar.addEventListener('pointermove',e=>{if(!drag)return;const x=Math.max(0,Math.min(innerWidth-panel.offsetWidth,e.clientX-drag.dx)),y=Math.max(0,Math.min(innerHeight-55,e.clientY-drag.dy));panel.style.left=x+'px';panel.style.top=y+'px';panel.style.right='auto'});
+ for(const ev of ['pointerup','pointercancel'])dragBar.addEventListener(ev,()=>drag=null);
+ function stopWaves(){if(waveFrame)cancelAnimationFrame(waveFrame);waveFrame=0;waveSources=[];waveAnalyzers=[];if(waveContext){waveContext.close().catch(()=>{});waveContext=null}}
+ function connectWave(stream,index){if(!stream?.getAudioTracks().length)return;try{waveContext=waveContext||new (window.AudioContext||window.webkitAudioContext)();waveContext.resume().catch(()=>{});const source=waveContext.createMediaStreamSource(stream),analyser=waveContext.createAnalyser();analyser.fftSize=256;source.connect(analyser);waveSources.push(source);waveAnalyzers[index]=analyser}catch(e){}}
+ function startWaves(){stopWaves();if(callKind!=='audio')return;connectWave(media,0);connectWave($('msn-remote-video').srcObject,1);const canvases=panel.querySelectorAll('.msn-wave');const draw=()=>{for(let i=0;i<2;i++){const canvas=canvases[i],ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle='#173952';ctx.fillRect(0,0,w,h);const a=waveAnalyzers[i],values=new Uint8Array(a?.frequencyBinCount||64);if(a)a.getByteFrequencyData(values);const bars=19,gap=3,bw=(w-24-(bars-1)*gap)/bars;for(let j=0;j<bars;j++){const v=a?values[Math.floor(j*values.length/bars)]/255:0;const height=3+v*(h-22);ctx.fillStyle=i===0?'#80d6ff':'#a4efc0';ctx.fillRect(12+j*(bw+gap),(h-height)/2,bw,height)}}waveFrame=requestAnimationFrame(draw)};draw()}
+
+ let media=null,call=null,pending=null,activePeer=null,ringTimer=null,ringContext=null,ringGain=null,busy=false;
+ let missedCalls=0;
+ const callBadge=document.createElement('span');callBadge.id='msn-call-badge';callBadge.className='hidden';callBadge.setAttribute('aria-live','polite');
+ $('chat-toggle').appendChild(callBadge);
+ function callNotice(state){
+  const toggle=$('chat-toggle');toggle.classList.toggle('msn-call-attention',state==='incoming');
+  if(state==='incoming') {callBadge.textContent='☎ Incoming call';callBadge.classList.remove('hidden');toggle.title='Incoming call — open Chat to answer';}
+  else if(state==='active'){callBadge.textContent='● In call';callBadge.classList.remove('hidden');toggle.title='Call in progress — open Chat';}
+  else if(state==='calling'){callBadge.textContent='☎ Calling…';callBadge.classList.remove('hidden');toggle.title='Calling opponent';}
+  else if(state==='missed'){missedCalls++;callBadge.textContent='☎ '+missedCalls+' missed';callBadge.classList.remove('hidden');toggle.title='Missed call — open Chat';}
+  else {callBadge.classList.add('hidden');toggle.title='Open Chat';}
+ }
+ $('chat-toggle').addEventListener('click',()=>{if(!document.querySelector('.chat-panel').classList.contains('chat-collapsed')&&!busy&&missedCalls){missedCalls=0;callNotice('none')} });
+ const show=t=>{panel.classList.remove('hidden');$('msn-call-status').textContent=t};
+ const visible=(id,on)=>$(id).classList.toggle('hidden',!on);
+ const connected=()=>mode==='online'&&conn?.open&&peer&&!peer.destroyed;
+ function beep(freq,duration,delay){try{ringContext=ringContext||new (window.AudioContext||window.webkitAudioContext)();if(!ringGain){ringGain=ringContext.createGain();ringGain.connect(ringContext.destination)}const t=ringContext.currentTime+delay;const osc=ringContext.createOscillator(),gain=ringContext.createGain();osc.type='sine';osc.frequency.setValueAtTime(freq,t);gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.07,t+.015);gain.gain.exponentialRampToValueAtTime(.0001,t+duration);osc.connect(gain);gain.connect(ringGain);osc.start(t);osc.stop(t+duration+.02)}catch(e){}}
+ function ring(){beep(660,.16,0);beep(880,.22,.2);beep(660,.17,.53)}
+ function stopRing(){if(ringTimer){clearInterval(ringTimer);ringTimer=null}if(ringGain&&ringContext){try{ringGain.gain.cancelScheduledValues(ringContext.currentTime);ringGain.gain.setValueAtTime(0,ringContext.currentTime)}catch(e){}}}
+ function startRing(){stopRing();if(ringGain)ringGain.gain.value=1;ring();ringTimer=setInterval(ring,2100)}
+ function controls(on){for(const id of ['msn-call-mute','msn-call-camera','msn-call-end'])visible(id,on);visible('msn-call-accept',false);visible('msn-call-decline',false)}
+ function release(){stopWaves();dockPanel();dockToggle.classList.add('hidden');stopRing();if(call){try{call.close()}catch(e){}call=null}if(pending){try{pending.close()}catch(e){}pending=null}if(media){media.getTracks().forEach(t=>t.stop());media=null}$('msn-local-video').srcObject=null;$('msn-remote-video').srcObject=null;busy=false;controls(false)}
+ function finish(message){const wasIncoming=!!pending;release();callNotice(wasIncoming&&message==='Missed call'?'missed':'none');show(message||'Call ended');setTimeout(()=>{if(!busy&&$('msn-call-status').textContent===message)panel.classList.add('hidden')},4000)}
+ function bindCall(c){call=c;pending=null;stopRing();controls(true);floatPanel();panel.classList.toggle('msn-audio',callKind==='audio');show('Connecting '+callKind+' call…');callNotice('calling');c.on('stream',remote=>{stopRing();$('msn-remote-video').srcObject=remote;$('msn-remote-video').play().catch(()=>{});startWaves();show('● Call connected');callNotice('active')});c.on('close',()=>{if(call===c)finish('Call ended')});c.on('error',()=>{if(call===c)finish('Call failed')})}
+ async function getMedia(video){if(!navigator.mediaDevices?.getUserMedia)throw Error('Camera and microphone require HTTPS or localhost');try{return await navigator.mediaDevices.getUserMedia({audio:true,video:video})}catch(e){if(video&&e.name==='NotFoundError')return navigator.mediaDevices.getUserMedia({audio:true,video:false});throw e}}
+ async function start(video){if(!connected()){alert('Connect to an online opponent first.');return}if(busy)return;busy=true;callKind=video?'video':'audio';show('Requesting camera and microphone…');try{media=await getMedia(video);$('msn-local-video').srcObject=media;$('msn-local-video').play().catch(()=>{});const c=peer.call(conn.peer,media,{metadata:{kind:video?'video':'audio'}});if(!c)throw Error('Unable to place call');bindCall(c);show('Calling opponent…');callNotice('calling');startRing()}catch(e){finish('Call could not start: '+e.message)}}
+ $('msn-call-start').onclick=()=>start(true);$('msn-call-audio').onclick=()=>start(false);
+ function incoming(c){if(!connected()||busy){try{c.close()}catch(e){}return}busy=true;pending=c;callKind=c.metadata?.kind==='audio'?'audio':'video';show('☎ Incoming '+(c.metadata?.kind==='audio'?'audio':'video')+' call from '+(game?.names?.[1-seat]||'opponent'));
+ visible('msn-call-accept',true);visible('msn-call-decline',true);callNotice('incoming');startRing();
+ c.on('close',()=>{if(pending===c)finish('Missed call')});}
+ $('msn-call-accept').onclick=async()=>{if(!pending)return;const c=pending;stopRing();try{if(conn?.open)conn.send({type:'msn-call-answered'})}catch(e){}callNotice('calling');show('Requesting camera and microphone…');try{media=await getMedia(c.metadata?.kind!=='audio');$('msn-local-video').srcObject=media;$('msn-local-video').play().catch(()=>{});bindCall(c);c.answer(media)}catch(e){finish('Could not answer: '+e.message)}};
+ $('msn-call-decline').onclick=()=>finish('Call declined');$('msn-call-end').onclick=()=>finish('Call ended');
+ $('msn-call-mute').onclick=()=>{if(!media)return;const tracks=media.getAudioTracks();if(!tracks.length)return;const enabled=!tracks[0].enabled;tracks.forEach(t=>t.enabled=enabled);$('msn-call-mute').textContent=enabled?'🎙 Mute':'🔇 Unmute'};
+ $('msn-call-camera').onclick=()=>{if(!media)return;const tracks=media.getVideoTracks();if(!tracks.length)return;const enabled=!tracks[0].enabled;tracks.forEach(t=>t.enabled=enabled);$('msn-call-camera').textContent=enabled?'📹 Camera off':'📷 Camera on'};
+ const priorCallReceived=received;received=function(data){if(data?.type==='msn-call-answered'){stopRing();if(busy){show('Opponent answered — connecting…');callNotice('calling')}return}priorCallReceived(data)};
+ function bindPeer(){if(peer&&peer!==activePeer){activePeer=peer;peer.on('call',incoming);if(busy)finish('Connection changed — call ended')}}
+ setInterval(()=>{bindPeer();if(busy&&(!conn?.open||mode!=='online'))finish('Opponent disconnected')},750);
+ window.addEventListener('pagehide',release);
+})();
+</script>
+
+<style id="invitation-landing-style">
+#invite-landing{max-width:760px;margin:16px auto 22px;text-align:center;padding:28px 24px!important}
+#invite-landing .invitation-symbol{font-size:43px;margin-bottom:8px}
+#invite-landing h2{font-size:clamp(24px,4vw,33px);margin:8px 0;color:#155b9b}
+#invite-landing .invitation-intro{font-size:19px;line-height:1.5;color:#254f77!important}
+#invite-landing .invite-actions{display:flex;flex-direction:column;align-items:center;gap:12px;margin:24px auto 10px}
+#invite-landing #invite-join-large{font-size:23px;padding:17px 35px;min-width:min(100%,340px);font-weight:800}
+#invite-landing #invite-create-alternative{font-size:15px}
+#invite-landing .invitation-note{font-size:13px;color:#57799b!important}
+#invite-landing .invitation-name{font-weight:800;color:#115c9d}
+#invite-landing .invitation-name-input{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+#invite-landing input{width:min(100%,290px)}
+</style>
+<script id="invitation-landing-script">
+(function(){
+ const $=id=>document.getElementById(id);
+ const params=new URLSearchParams(location.search);
+ const code=params.get('room');
+ const rawHost=params.get('host');
+ function validName(name){return (name||'').replace(/[\x00-\x1f]/g,'').trim().slice(0,24)}
+ function isGuestInvite(){return Boolean(code)&&params.get('home')!=='1'}
+ // Include the host's chosen name in future invitations, not merely a room ID.
+ const link=$('link');
+ if(link){
+  let busy=false;
+  const updateLink=()=>{
+   if(busy||!link.value||!room||seat!==0||mode!=='online')return;
+   let u;try{u=new URL(link.value)}catch(e){return}
+   const hostName=validName(game?.names?.[0]||$('name').value)||'Player 1';
+   if(u.searchParams.get('host')===hostName)return;
+   busy=true;u.searchParams.set('host',hostName);link.value=u.toString();
+   const qr=$('qr');if(qr&&typeof QRCode!=='undefined'){
+     qr.replaceChildren();new QRCode(qr,{text:link.value,width:170,height:170});
+   }
+   busy=false;
+  };
+  new MutationObserver(updateLink).observe($('invite'),{attributes:true,attributeFilter:['class']});
+  link.addEventListener('change',updateLink);
+  setInterval(updateLink,1500);
+ }
+ if(!isGuestInvite())return;
+ // A saved host session may be resuming: do not cover an active match or its invite screen.
+ if(mode==='online'&&seat===0)return;
+ const panel=document.createElement('section');panel.id='invite-landing';panel.className='panel';
+ const name=validName(rawHost)||'A player';
+ panel.innerHTML='<div class="invitation-symbol">🃏</div><h2>You have been invited to play!</h2><p class="invitation-intro"><span class="invitation-name" id="invitation-host-name"></span> has invited you to a game of <strong>7 Hand Poker</strong>.</p><p class="invitation-note">Your opponent is waiting for you to join their room.</p><div class="invitation-name-input"><label for="invitation-guest-name"><strong>Your name</strong></label><input id="invitation-guest-name" maxlength="24" placeholder="Enter your name" value="Player 2"></div><div class="invite-actions"><button id="invite-join-large" type="button">♠ JOIN THE ROOM</button><button id="invite-create-alternative" class="secondary" type="button">Create your own online room</button></div><p class="invitation-note">No account required. Your friend must keep their room open.</p>';
+ panel.querySelector('#invitation-host-name').textContent=name;
+ const menu=$('menu');menu.parentNode.insertBefore(panel,menu);
+ menu.classList.add('hidden');
+ // Don't promise live online presence before a PeerJS connection has succeeded.
+ panel.querySelector('#invite-join-large').onclick=()=>{
+   $('roomcode').value=code;
+   $('name').value=validName($('invitation-guest-name').value)||'Player 2';
+   panel.classList.add('hidden');
+   $('join').click();
+ };
+ panel.querySelector('#invite-create-alternative').onclick=()=>{
+   panel.classList.add('hidden');menu.classList.remove('hidden');
+   $('name').value=validName($('invitation-guest-name').value)||'Player 2';
+   $('roomcode').value='';
+   // Remove invite parameters so refresh does not return to this invitation.
+   const u=new URL(location.href);u.searchParams.delete('room');u.searchParams.delete('host');
+   history.replaceState(null,'',u.toString());
+   $('create').focus();
+ };
+})();
+</script>
+
+<style id="computer-mode-style">
+#computer-choice{margin-top:12px;padding:17px;background:linear-gradient(#f5fbff,#e1f0ff);border:1px solid #9cc7e9;border-radius:9px;color:#164d81}
+#computer-choice h3{margin:0 0 9px}
+#computer-choice .ai-levels{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+#computer-choice .ai-levels button{flex:1;min-width:95px;padding:12px}
+#computer-choice .ai-levels button[aria-pressed="true"]{outline:3px solid #e8a53b;background:linear-gradient(#fff8dd,#ffd78a)!important}
+#ai-thinking{font-weight:bold;color:#174e81;margin-top:8px}
+#computer-choice .ai-help{font-size:13px;color:#476c90}
+@media(max-width:500px){#computer-choice .ai-levels button{min-width:0;font-size:13px}}
+</style>
+<script id="computer-mode-engine">
+(function(){
+'use strict';
+const menu=document.getElementById('menu');
+const computerButton=document.createElement('button');computerButton.id='computer-open';computerButton.type='button';computerButton.textContent='🤖 Play against Computer';
+document.getElementById('local').insertAdjacentElement('afterend',computerButton);
+const chooser=document.createElement('div');chooser.id='computer-choice';chooser.hidden=true;
+chooser.innerHTML='<h3>🤖 Choose your opponent</h3><p class="ai-help">Play solo against the computer. Beginner makes simple moves; Advanced plans for coins; Expert estimates hidden-hand strength and prioritises winning lines. The computer never looks at your hidden cards.</p><div class="ai-levels"><button type="button" data-ai="beginner">🌱 Beginner</button><button type="button" data-ai="advanced">♟ Advanced</button><button type="button" data-ai="expert">🏆 Expert</button></div><p class="ai-help">Choose a difficulty to start. You play as blue Player 1.</p>';
+menu.querySelector('.howto').insertAdjacentElement('beforebegin',chooser);
+computerButton.onclick=()=>{chooser.hidden=!chooser.hidden;if(!chooser.hidden)chooser.scrollIntoView({block:'nearest',behavior:'smooth'})};
+let level='beginner',thinking=false,job=0,aiTurnId='',humanHidden=null;
+const humanName=()=>document.getElementById('name').value.trim()||'Player 1';
+const rand=n=>Math.floor(Math.random()*n);
+const choose=a=>a[rand(a.length)];
+const combinations=(cards)=>{const out=[];for(let mask=1;mask<(1<<cards.length);mask++){let ids=[];for(let i=0;i<cards.length;i++)if(mask&(1<<i))ids.push(i);if(ids.length<=5)out.push(ids)}return out};
+const boardOwners=(g)=>g.lanes.map(l=>l.owner);
+function boardValue(owners,who){let value=0;for(let i=0;i<7;i++)if(owners[i]===who)value+=9;for(let i=0;i<5;i++){let a=owners.slice(i,i+3),own=a.filter(x=>x===who).length,enemy=a.filter(x=>x===1-who).length;if(!enemy)value+=own===3?900:own===2?65:own===1?9:0;if(!own&&enemy)value-=enemy===3?1100:enemy===2?95:enemy===1?12:0}let count=owners.filter(x=>x===who).length,other=owners.filter(x=>x===1-who).length;if(count>=4)value+=1200;if(other>=4)value-=1300;return value}
+function positionWeight(g,index,who){let owners=boardOwners(g),base=boardValue(owners,who);owners[index]=who;const winGain=boardValue(owners,who)-base;owners[index]=1-who;const loseCost=base-boardValue(owners,who);return {gain:winGain,loss:loseCost}}
+function estimateStrength(cards){let ev=evaluate(cards);let score=ev[0]*15+(ev[1]||0)*.7+cards.length*.55;return score}
+function chooseSubmission(g){let cards=g.hands[1],opts=combinations(cards);if(level==='beginner'){if(Math.random()<.65){let n=1+rand(Math.min(5,cards.length)),arr=[...cards.keys()].sort(()=>Math.random()-.5);return arr.slice(0,n)}return choose(opts)}
+ let best=null,top=-Infinity;const existing=g.lanes.filter(l=>l.owner===null&&l.plays[0]).length;
+ for(const ids of opts){const hand=ids.map(i=>cards[i]);let ev=evaluate(hand),strength=estimateStrength(hand);let remaining=cards.filter((_,i)=>!ids.includes(i));let future=remaining.length?Math.max(...combinations(remaining).map(a=>estimateStrength(a.map(i=>remaining[i])))):0;
+ // Preserve a playable future hand, but reward strong current combinations.
+ let score=strength+(level==='expert'?.19:.34)*future+Math.min(existing,3)*ev[0]*1.2;
+ if(ids.length===5&&ev[0]===0)score-=level==='expert'?9:5;
+ if(level==='expert')score+=ids.length===5?1:0;
+ score+=Math.random()*(level==='expert'?1.8:7);
+ if(score>top){top=score;best=ids}
+ }
+ return best||[0]
+}
+// Build a plausible opponent hand from cards legitimately known to the computer.
+function possibleHand(g,count){const known=new Set([...g.hands[1],...g.lanes.flatMap(l=>l.plays[1]||[]),...g.lanes.filter(l=>l.owner!==null).flatMap(l=>l.plays[0]||[])].filter(c=>c&&c.r>=2).map(c=>c.id));const pool=[];for(let suit=0;suit<4;suit++)for(let rank=2;rank<=14;rank++){let id=suit+'-'+rank;if(!known.has(id))pool.push({r:rank,s:suit,id})}for(let i=pool.length-1;i>0;i--){let j=rand(i+1);[pool[i],pool[j]]=[pool[j],pool[i]]}return pool.slice(0,count)}
+function pickPosition(g){const by=g.pending?.by;if(by!==0)return null;let options=[];for(let i=0;i<7;i++){const lane=g.lanes[i];if(lane.owner!==null||lane.plays[0])continue;options.push(i)}if(!options.length)return null;if(level==='beginner')return choose(options);
+ let best=options[0],bestScore=-Infinity;
+ for(const i of options){let l=g.lanes[i],w=positionWeight(g,i,1),score=0;
+ if(l.plays[1]){
+  // The AI knows its own cards already placed at this coin, not the player's hidden hand.
+  let wins=0,ties=0,n=level==='expert'?110:24;
+  for(let k=0;k<n;k++){let candidate=possibleHand(g,g.pending.cards.length);if(candidate.length!==g.pending.cards.length)break;let comparison=cmp(l.plays[1],candidate);if(comparison>0)wins++;if(comparison===0)ties++}
+  let p=(wins+ties*.2)/n;score=p*w.gain-(1-p)*w.loss+16*p;
+ }else{
+  // Sending the human hand to an empty position creates a future target.
+  score=-w.loss*.42+Math.random()*2;
+  // Prefer locations that do not complete an enemy line, while preserving flexibility.
+ }
+ score+=Math.random()*(level==='expert'?1.5:10);
+ if(score>bestScore){bestScore=score;best=i}
+ }
+ return best
+}
+function markComputer(){const indicator=document.getElementById('connection');if(mode==='computer')indicator.textContent='🤖 Solo • '+level[0].toUpperCase()+level.slice(1)}
+function runAI(){if(mode!=='computer'||!game||game.winner!==null||game.turn!==1||thinking)return;thinking=true;const token=++job;const delay=level==='beginner'?600:level==='advanced'?850:1200;
+ game.log='Computer is thinking…';render();setTimeout(()=>{
+  if(token!==job||mode!=='computer'||!game||game.winner!==null||game.turn!==1){thinking=false;return}
+  let moveData=game.phase==='submit'?{type:'submit',indices:chooseSubmission(game)}:{type:'place',index:pickPosition(game)};
+  // The normal game engine handles dealing, comparisons, turns and victories.
+  let ok=moveData.index!==null&&apply(game,moveData);
+  thinking=false;if(ok){selected=[];render();if(game.turn===1)queueAI()}
+ },delay)}
+function queueAI(){if(mode==='computer'&&game&&game.turn===1&&game.winner===null&&!thinking)runAI()}
+for(const b of chooser.querySelectorAll('[data-ai]'))b.onclick=()=>{
+ level=b.dataset.ai;for(const x of chooser.querySelectorAll('[data-ai]'))x.setAttribute('aria-pressed',String(x===b));
+ ++job;thinking=false;mode='computer';seat=0;selected=[];game=newGame();game.names=[humanName(),'Computer ('+level[0].toUpperCase()+level.slice(1)+')'];markComputer();chooser.hidden=true;render();
+};
+// Keep a hosted room alive while a solo game runs. Never discard its PeerJS ID.
+let waitingRoom=false,friendReady=false,friendName='Player 2';
+const waitButton=document.createElement('button');waitButton.type='button';waitButton.id='wait-play-computer';waitButton.textContent='🤖 Play while waiting';waitButton.style.cssText='display:block;margin:12px auto;padding:12px 22px;font-weight:bold';
+document.getElementById('invite').appendChild(waitButton);
+waitButton.onclick=()=>{if(!peer||peer.destroyed||seat!==0||!room)return;waitingRoom=true;friendReady=false;mode='computer';selected=[];document.getElementById('invite').classList.add('hidden');document.getElementById('menu').classList.remove('hidden');chooser.hidden=false;chooser.scrollIntoView({block:'nearest'});document.getElementById('connection').textContent='● Room open · choose computer difficulty';};
+const arrival=document.createElement('div');arrival.id='friend-arrival';arrival.className='hidden';arrival.style.cssText='display:none;position:fixed;inset:0;background:#001b3680;z-index:9999;display:flex;align-items:center;justify-content:center;padding:15px';
+arrival.innerHTML='<div style="background:#f0f8ff;color:#154b7d;border:3px solid #63a7da;border-radius:13px;box-shadow:0 12px 45px #1238;padding:25px;max-width:410px;width:100%;text-align:center;font:15px Tahoma,Arial"><h2 style="margin-top:0">🎉 Your friend has arrived!</h2><p id="friend-arrival-name"></p><p>Your computer match will be discarded if you switch now.</p><button type="button" id="friend-join-now" style="width:100%;padding:13px;margin:6px 0">👥 Join Friend Now</button><button type="button" id="friend-finish-first" class="secondary" style="width:100%;padding:12px;margin:6px 0">Finish Computer Match First</button></div>';
+document.body.appendChild(arrival);
+function hideArrival(){arrival.classList.add('hidden');arrival.style.display='none'}
+function showArrival(){arrival.classList.remove('hidden');arrival.style.display='flex';document.getElementById('friend-arrival-name').textContent=friendName+' has joined your room and is ready to play.'}
+function joinFriend(){if(!conn?.open)return;hideArrival();++job;thinking=false;waitingRoom=false;friendReady=false;mode='online';seat=0;selected=[];game=newGame();game.names=[humanName(),friendName];document.getElementById('computer-choice').hidden=true;document.getElementById('menu').classList.add('hidden');document.getElementById('invite').classList.add('hidden');sync();render();document.getElementById('connection').textContent='● Connected to '+friendName;}
+document.getElementById('friend-join-now').onclick=joinFriend;
+document.getElementById('friend-finish-first').onclick=()=>{hideArrival();if(conn?.open)conn.send({type:'host-waiting',name:humanName()});const resume=document.getElementById('friend-ready-bar');if(resume)resume.hidden=false};
+const resume=document.createElement('button');resume.id='friend-ready-bar';resume.type='button';resume.hidden=true;resume.textContent='👥 '+friendName+' is waiting — Join Friend';resume.style.cssText='position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:999;padding:12px 19px;background:#ffdb83;color:#183c65;border:2px solid #e8a342;border-radius:9px;font-weight:bold;box-shadow:0 4px 14px #0005';document.body.appendChild(resume);resume.onclick=joinFriend;
+window.waitingComputerActive=()=>waitingRoom&&mode==='computer';
+window.waitingFriendArrived=(name)=>{if(!waitingRoom)return;friendName=(name||friendName).slice(0,24);friendReady=true;resume.textContent='👥 '+friendName+' is waiting — Join Friend';showArrival()};
+// A connection may arrive while the difficulty menu is still open.
+const oldModeCreate=document.getElementById('create').onclick;
+document.getElementById('create').onclick=(...args)=>{waitingRoom=false;friendReady=false;resume.hidden=true;hideArrival();return oldModeCreate(...args)};
+const oldPlayer=player;player=function(){return mode==='computer'?0:oldPlayer()};
+const oldMyTurn=myTurn;myTurn=function(){return mode==='computer'?!!game&&game.winner===null&&game.turn===0:oldMyTurn()};
+const oldMove=move;move=function(m){if(mode!=='computer')return oldMove(m);if(!myTurn())return;if(apply(game,m)){selected=[];render();queueAI()}};
+const oldRender=render;render=function(...args){const result=oldRender(...args);if(mode==='computer'&&game){markComputer();const opp=document.getElementById('oppcards');if(game.turn===1&&game.winner===null){document.getElementById('status').textContent=game.log} }return result};
+const oldLocal=document.getElementById('local').onclick;document.getElementById('local').onclick=(...a)=>{++job;thinking=false;return oldLocal(...a)};
+const oldCreate=document.getElementById('create').onclick;document.getElementById('create').onclick=(...a)=>{++job;thinking=false;return oldCreate(...a)};
+const oldJoin=document.getElementById('join').onclick;document.getElementById('join').onclick=(...a)=>{++job;thinking=false;return oldJoin(...a)};
+// The existing rematch button uses mode==='local' to restart. Adapt only its click in solo mode.
+const rematch=document.getElementById('result-rematch');if(rematch){const oldRematch=rematch.onclick;rematch.onclick=function(...a){if(mode!=='computer')return oldRematch.apply(this,a);if(!game||game.winner===null)return;++job;thinking=false;selected=[];const names=[...game.names];game=newGame();game.names=names;document.getElementById('match-result').classList.add('hidden');const back=document.getElementById('back-to-results');if(back)back.style.display='none';render();queueAI()}}
+})();
+</script>
+<script id="animated-landing-guide-js">
+(function(){
+ const menu=document.getElementById('menu');if(!menu)return;
+ const guide=document.createElement('section');guide.id='landing-guide';guide.setAttribute('aria-label','Interactive illustrated how-to-play guide');
+ guide.innerHTML=`<div class="lg-head"><div><strong>🃏 See how 7 Hand Poker works</strong><p>The two screens show what each player sees during the game. Use Back and Next to explore the moves.</p></div></div>
+ <div class="lg-dual" id="lg-dual-stage"><div class="lg-screen"><div class="lg-screen-title">🔵 Your screen</div><div class="lg-stage"><div class="lg-player">OPPONENT’S CARDS</div><div id="lg-top-hand-0" class="lg-hand"></div><div id="lg-board-0" class="lg-board"></div><div class="lg-player">YOUR CARDS</div><div id="lg-bottom-hand-0" class="lg-hand"></div></div></div>
+ <div class="lg-screen"><div class="lg-screen-title">🟠 Your opponent’s screen</div><div class="lg-stage"><div class="lg-player">OPPONENT’S CARDS</div><div id="lg-top-hand-1" class="lg-hand"></div><div id="lg-board-1" class="lg-board"></div><div class="lg-player">YOUR CARDS</div><div id="lg-bottom-hand-1" class="lg-hand"></div></div></div></div>
+ <div class="lg-caption" aria-live="polite"><b id="lg-caption-title"></b><span id="lg-caption-detail"></span></div>
+ <div class="lg-footer"><span id="lg-step">Step 0 of 7</span><div class="lg-controls"><button type="button" class="secondary" id="lg-prev">← Back</button><button type="button" id="lg-next">Next →</button></div></div><div class="lg-dots" id="lg-dots" aria-label="Choose a guide step"></div>`;
+ const howto=menu.querySelector('.howto');if(howto)menu.insertBefore(guide,howto);else menu.append(guide);
+ const el=id=>document.getElementById(id);
+ const initial=['A♠','A♥','K♣','Q♦','9♠','7♣','4♥'], rival=['J♠','J♥','8♦','7♠','5♣','3♦','2♥'];
+ const p1Draw=['10♣','6♦','3♠'], p2Draw=['K♥','10♦','4♣'];
+ const scenes=[
+ {title:'0. The goal: win coins strategically',detail:'7 Hand Poker is a strategy game. Capture four coins anywhere on the board, or three consecutive coins, to win. You submit a poker hand, but your opponent decides where to place it. Think carefully about which positions help you win or block your opponent.',intro:true},
+ {title:'1. Each player sees their own seven cards',detail:'Each player sees their own seven cards face up, while the other player sees only card backs. The two screens show what each player sees during the game.'},
+ {title:'2. Player 1 makes the first selection',detail:'The player who created the room moves first: Player 1 selects 1–5 cards and submits them as a hidden hand. Player 2 cannot see their values. Here, Player 1 selects two Aces. After submitting them, three new cards are dealt to Player 1.',selected:[0,1]},
+ {title:'3. Player 2 chooses a coin position',detail:'Player 2 chooses where to place Player 1’s hidden Aces using the coin-selection popup. Placement is strategic: protect a possible three-coin line, block your opponent, or work toward four coins. Player 1 has already received three replacement cards, so their hand now contains eight cards. In this example, Player 2 chooses coin 4. Click Next to see the result.',pending:0,popupFor:1,focus:[3]},
+ {title:'4. Player 2 now makes their selection',detail:'Player 1’s Aces have been placed at coin 4. Player 2 now selects two Jacks from their own hand and submits them face down. Player 1 cannot see the values. After submitting the Jacks, Player 2 also receives three new cards.',placed:0,selectedBy:1,selected:[0,1],focus:[3]},
+ {title:'5. Player 1 chooses a coin position',detail:'Player 1 now receives Player 2’s hidden pair of Jacks and chooses a coin position. The popup appears only on Player 1’s screen; Player 2’s two Jacks have left their hand, and three replacement cards have been dealt. The submitted Jacks are waiting for Player 1 to place them. In this example, Player 1 chooses coin 4. Click Next to reveal and compare the hands.',placed:0,pending:1,popupFor:0,focus:[3]},
+ {title:'6. The hands are compared',detail:'Player 1 puts the hidden hand at coin 4. Both hands are revealed: two Aces beat two Jacks, so Player 1 captures coin 4.',revealed:true,owners:[3],focus:[3]},
+ {title:'7. Final score: Player 1 wins 4–3',detail:'A fictional full-board finish: Player 1 (blue) captures coins 1, 3, 5 and 7, while Player 2 (orange) captures coins 2, 4 and 6. Neither player completes three consecutive coins, so Player 1 wins by claiming four coins.',revealed:true,finalBoard:true,owners:[0,2,4,6],focus:[0,2,4,6]}
+ ];
+ function mini(value,back){const e=document.createElement('span');e.className='lg-mini'+(back?' back':/[♥♦]/.test(value||'')?' red':'');e.textContent=back?'✦':value;return e}
+ function hand(id,cards,backs,selected){const target=el(id);target.replaceChildren();(backs?Array(cards.length).fill(''):cards).forEach((c,i)=>{const n=mini(c,backs);if(selected?.includes(i))n.classList.add('lg-selected');target.append(n)})}
+ function paintSide(s,who){
+ const original=who===0?initial:rival;
+ const submitted=who===0?index>=3:index>=5;
+ // In the real game, submitting two cards removes them and immediately deals three.
+ const replacement=who===0?p1Draw:p2Draw;
+ const current=s.finalBoard?[]:submitted?[...original.slice(2),...replacement]:original;
+ const opponentSubmitted=who===0?index>=5:index>=3;
+ const opponentCount=opponentSubmitted?8:7;
+ hand('lg-top-hand-'+who,Array(opponentCount).fill(''),true);
+ if(s.finalBoard)el('lg-top-hand-'+who).replaceChildren();
+ hand('lg-bottom-hand-'+who,current,false,(s.selectedBy??0)===who?s.selected:undefined);
+ const board=el('lg-board-'+who);board.replaceChildren();board.parentElement.querySelectorAll('.lg-placement-shade').forEach(n=>n.remove());
+ for(let i=0;i<7;i++){const lane=document.createElement('div');lane.className='lg-lane'+(s.focus?.includes(i)?' lg-focus':'');const upper=document.createElement('div'),lower=document.createElement('div');upper.className=lower.className='lg-slots';
+ function slot(owner){return owner===who?lower:upper}
+ function add(owner,cards,hidden){const target=slot(owner);cards.forEach(c=>target.append(mini(c,hidden)))}
+ if(s.finalBoard){
+  // Fictional 4–3 finish: alternating ownership prevents an earlier three-in-a-row win.
+  // Each lane shows two valid poker hands; winners match the comparison rules.
+  const finished=[
+   {p1:['A♠','A♥','A♦','K♣','K♦'],p2:['9♠','9♥','9♦','2♣','2♦'],owner:0}, // full houses, blue wins
+   {p1:['2♠','5♠','8♠','J♠','K♠'],p2:['3♥','6♥','9♥','Q♥','A♥'],owner:1}, // flushes, orange wins
+   {p1:['Q♣','Q♦','Q♥'],p2:['J♠','J♦','J♣'],owner:0}, // three of a kind, blue wins
+   {p1:['4♣','5♦','6♥','7♠','8♣'],p2:['7♣','8♦','9♥','10♠','J♣'],owner:1}, // straights, orange wins
+   {p1:['A♣','A♦','A♥','A♠'],p2:['K♠','K♥','K♦','K♣'],owner:0}, // four of a kind, blue wins
+   {p1:['10♣','10♦','6♠','6♥'],p2:['J♠','J♦','8♣','8♥'],owner:1}, // two pairs, orange wins
+   {p1:['5♥','6♥','7♥','8♥','9♥'],p2:['A♣','A♦','Q♠','Q♥','Q♦'],owner:0} // straight flush vs full house, blue wins
+  ];
+  const f=finished[i];add(0,f.p1,false);add(1,f.p2,false);
+ }else if(i===3){if(s.placed===0||s.pending===1||s.revealed)add(0,['A♠','A♥'],who!==0&&!s.revealed);if(s.revealed)add(1,['J♠','J♥'],false)}
+ const coin=document.createElement('div');coin.className='lg-coin';if(s.finalBoard){coin.classList.add(i%2===0?'blue':'orange');coin.textContent='✓'}else if(s.owners?.includes(i)){coin.classList.add('blue');coin.textContent='✓'}else coin.textContent='★';lane.append(upper,coin,lower);board.append(lane)}
+ // Only the player receiving the hidden hand sees the coin-position chooser.
+ if(s.popupFor===who){
+  const shade=document.createElement('div');shade.className='lg-placement-shade';
+  const popup=document.createElement('div');popup.className='lg-placement-popup';popup.setAttribute('role','group');popup.setAttribute('aria-label','Coin placement example (illustration only)');
+  const heading=document.createElement('strong');heading.textContent='🪙 Coin placement — coin 4';
+  const explanation=document.createElement('p');explanation.textContent='Your opponent submitted 2 hidden cards. Where should they go?';
+  const cards=document.createElement('div');cards.className='lg-placement-cards';cards.append(mini('',true),mini('',true));
+  const choices=document.createElement('div');choices.className='lg-placement-choices';
+  for(let i=0;i<7;i++){const b=document.createElement('button');b.type='button';b.textContent=String(i+1);b.title=i===3?'Coin 4 is selected in this example':'Illustration only';b.disabled=true;if(i===3)b.className='lg-choice-highlight';choices.append(b)}
+  popup.append(heading,explanation,cards,choices);shade.append(popup);board.parentElement.append(shade);
+ }
+ }
+ let index=0;const dots=[];
+ function paint(){const s=scenes[index];const stage=el('lg-dual-stage');if(stage){stage.classList.remove('lg-slide-enter');void stage.offsetWidth;stage.classList.add('lg-slide-enter')}paintSide(s,0);paintSide(s,1);el('lg-caption-title').textContent=s.title;el('lg-caption-detail').textContent=s.detail;el('lg-step').textContent='Step '+index+' of '+(scenes.length-1);el('lg-prev').disabled=index===0;el('lg-next').disabled=index===scenes.length-1;dots.forEach((d,i)=>{d.setAttribute('aria-current',String(i===index));d.title='Step '+i+': '+scenes[i].title})}
+ function go(n){if(n<0||n>=scenes.length)return;index=n;paint()}
+ el('lg-prev').onclick=()=>go(index-1);el('lg-next').onclick=()=>go(index+1);
+ scenes.forEach((_,i)=>{const d=document.createElement('button');d.type='button';d.className='lg-dot';d.setAttribute('aria-label','Go to step '+i);d.onclick=()=>go(i);el('lg-dots').append(d);dots.push(d)});
+ paint();
+})();
+</script></body></html>
